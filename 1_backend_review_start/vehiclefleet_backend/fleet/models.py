@@ -11,7 +11,7 @@ class Vehicle(models.Model):
     year = models.PositiveIntegerField()
     licence_plate = models.CharField(max_length=100)
 
-    # in the admin when when you print out the model
+    # in the admin when you print out the model
     # you want something intelligible
     def __str__(self):
         return f" {self.make}, {self.model}, {self.year}, ({self.licence_plate})"

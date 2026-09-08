@@ -30,9 +30,21 @@ class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
         fields = [
+            # is the primary key (added automatically to all model instances)
             "id",
+            # I'm going to include the vehicle/driver for writing only
+            # this will take an id.
+            "vehicle",
+            "driver",
+            # your plain old columns
             "start_location",
             "end_location",
             "start_time",
             "end_time",
+            "distance",
         ]
+        # extra kwargs which explicitly set the vehicle and driver to write only.
+        extra_kwargs = {
+            "vehicle": {"write_only": True},
+            "driver": {"write_only": True},
+        }

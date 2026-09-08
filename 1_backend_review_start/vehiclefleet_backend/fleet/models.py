@@ -18,9 +18,21 @@ class Vehicle(models.Model):
 
 
 # driver
+class Driver(models.Model):
+    name = models.CharField(max_length=150)
+    # but you don't want two folks with the same number
+    # so you can enforce this with unique in the table so
+    # now two rows will be equal.
+    license_number = models.CharField(max_length=50, unique=True)
+    phone = models.CharField(max_length=20, blank=True)
+    # maybe in the future this would be a foreignkey
+    # to a user/profile that can authenticate into the account.
+    email = models.EmailField(blank=True)
 
+# In the future we might want to consider some of these tables.
 # manufacturer?
-
 # location?
 
 # trip
+class Trip(models.Model):
+    # this is going to have a foreign key to both tables.

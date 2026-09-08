@@ -20,3 +20,19 @@ class DriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Driver  # the orm model
         fields = "__all__"  # this means all of the columns.
+
+
+# with the trip serializer we're going to make it a bit different
+# because we're going add some information here from the other
+# serializers.
+class TripSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Trip
+        fields = [
+            "id",
+            "start_location",
+            "end_location",
+            "start_time",
+            "end_time",
+        ]

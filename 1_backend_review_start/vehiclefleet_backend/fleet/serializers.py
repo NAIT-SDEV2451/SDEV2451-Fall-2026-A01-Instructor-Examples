@@ -26,6 +26,13 @@ class DriverSerializer(serializers.ModelSerializer):
 # because we're going add some information here from the other
 # serializers.
 class TripSerializer(serializers.ModelSerializer):
+    # for the read serializers to have a better representation of the data
+    # we want to show the nested fields with the above.
+    vehicle_detail = VehicleSerializer(source="vehicle", read_only=True)
+    driver_detail = DriverSerializer(source="driver", read_only=True)
+
+    # the read only here will only be on GETs
+    # note the "vehicle" and "driver" in the above are the database model instance fields.
 
     class Meta:
         model = Trip
@@ -36,6 +43,10 @@ class TripSerializer(serializers.ModelSerializer):
             # this will take an id.
             "vehicle",
             "driver",
+            # we also need to include the readonly fields which will refer
+            # to the fields we've declared.
+            "vehicle_detail",
+            "driver_detail",
             # your plain old columns
             "start_location",
             "end_location",

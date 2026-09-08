@@ -29,10 +29,17 @@ class Driver(models.Model):
     # to a user/profile that can authenticate into the account.
     email = models.EmailField(blank=True)
 
+
 # In the future we might want to consider some of these tables.
 # manufacturer?
 # location?
 
+
 # trip
 class Trip(models.Model):
     # this is going to have a foreign key to both tables.
+    vehicle = models.ForeignKey(
+        Vehicle,  # note: in some instances it might be better to write this as a string
+        on_delete=models.CASCADE,  # if you delete a vehicle, it'll delete the trips.
+        related_name="trips",  # how to get related trips on the vehicle instance
+    )

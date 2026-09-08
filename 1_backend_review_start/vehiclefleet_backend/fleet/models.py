@@ -43,3 +43,19 @@ class Trip(models.Model):
         on_delete=models.CASCADE,  # if you delete a vehicle, it'll delete the trips.
         related_name="trips",  # how to get related trips on the vehicle instance
     )
+    driver = models.ForeignKey(
+        Driver,  # note: in some instances it might be better to write this as a string
+        on_delete=models.CASCADE,  # if you delete a driver, it'll delete the trips.
+        related_name="trips",  # how to get related trips on the driver instance
+    )
+    # the start and end locations these can be done in different ways.
+    start_location = models.CharField(max_length=255)
+    end_location = models.CharField(max_length=255)
+    # start and end times are date time fields
+    start_time = models.DateTimeField()
+    # make the end time so that it can be blank and null (you don't start with one)
+    end_time = models.DateTimeField(null=True, blank=True)
+    # we'll calculate this later
+    distance = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True, blank=True
+    )

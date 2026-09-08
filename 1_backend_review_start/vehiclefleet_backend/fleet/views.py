@@ -47,3 +47,15 @@ class DriverViewSet(ModelViewSet):
     queryset = Driver.objects.all()
     # define how we're going to serialize that data
     serializer_class = DriverSerializer
+
+
+class TripViewSet(ModelViewSet):
+    serializer_class = TripSerializer
+
+    # what we can do is instead of defining "queryset" class field,
+    # we can define the function "get_queryset" this is handy when
+    # you need the user.
+    def get_queryset(self):
+        # this is getting from the database "select_related" is an
+        # optimization that we'll discuss later in the semester
+        return Trip.objects.select_related("vehicle", "driver").all()

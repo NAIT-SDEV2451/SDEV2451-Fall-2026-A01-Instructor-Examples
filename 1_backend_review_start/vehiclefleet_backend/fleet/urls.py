@@ -29,4 +29,6 @@ urlpatterns = [
         FleetStatsView.as_view(),  # CBV notation from last semester
         name="fleet-stats",
     ),
+    # include the router urls
+    path("", include(router.urls)),
 ]

@@ -1,6 +1,6 @@
 # we are going to create a serializer for each of these.
 # using django rest framework for this.
-from rest_framwork import serializers  # brings in the library
+from rest_framework import serializers  # brings in the library
 
 # import all of my models
 from fleet.models import Driver, Trip, Vehicle

@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 # from our own code.
 from fleet.models import Driver, Trip, Vehicle
@@ -13,6 +14,7 @@ from fleet.serializers import (
 # we're going to create a view that just gives us the count
 # of all of the items.
 class FleetStatsView(APIView):
+    # Note: permissions are AllowAny by default based on settings.py
     # define the GET request only
     def get(self, request):
         # to the user we're going to return a json
@@ -27,3 +29,21 @@ class FleetStatsView(APIView):
         )
         # here we're querying our database rather than defining and
         # populating in previous steps.
+
+
+# let's use our knowledge of model viewsets which will create
+# the get, put, patch, post, delete endpoints without writing a ton
+# of code here.
+class VehicleViewSet(ModelViewSet):
+    # what is the default queryset (think orm) from the DB
+    queryset = Vehicle.objects.all()
+    # define how we're going to serialize that data
+    serializer_class = VehicleSerializer
+
+
+# same thing for the driver.
+class DriverViewSet(ModelViewSet):
+    # what is the default queryset (think orm) from the DB
+    queryset = Driver.objects.all()
+    # define how we're going to serialize that data
+    serializer_class = DriverSerializer

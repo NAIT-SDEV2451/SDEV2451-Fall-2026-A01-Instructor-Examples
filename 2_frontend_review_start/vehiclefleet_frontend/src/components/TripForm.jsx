@@ -20,6 +20,14 @@ export default function TripForm({
   const [form, setForm] = useState(EMPTY_FORM)
   // form here is that value you're going to read in this func.
   // setForm is going to update the "form" value whenever you call it.
+  // EMPTY_FORM the original value of form.
+
+  function handleChange(event) {
+    setForm({
+      ...form, // spreading all existing values of form into the new obj
+      [event.target.name]: event.target.value // i'm using the name of target and setting to the value.
+    })
+  }
 
 
   return <>

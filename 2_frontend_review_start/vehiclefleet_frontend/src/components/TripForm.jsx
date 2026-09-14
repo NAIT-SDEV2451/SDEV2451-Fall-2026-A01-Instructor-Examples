@@ -64,6 +64,7 @@ export default function TripForm({
             })}
           </select>
         </div>
+        {/* build it for drivers! copy and change based on the above. */}
         <div className="card-actions justify-end pt-2">
           <button type="submit" className="btn btn-primary">Create Trip</button>
         </div>

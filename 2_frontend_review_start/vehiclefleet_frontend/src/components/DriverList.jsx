@@ -19,8 +19,6 @@ export default function DriverList({drivers}) {
         <tbody>
           {/* first we're going to use static data to loop through */}
           {drivers.map((driver)=> {
-
-
             return <tr key={driver.id}>
               <td>{driver.id}</td>
               <td>{driver.name}</td>

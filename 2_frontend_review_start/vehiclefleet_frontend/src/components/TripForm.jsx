@@ -44,8 +44,11 @@ export default function TripForm({
             <div className="label pb-1">
               <span className="label-text font-medium">Vehicle</span>
             </div>
-            <select name="vehicle"
-              className="select select-bordered w-full" required>
+            <select
+              name="vehicle"
+              className="select select-bordered w-full"
+              required
+            >
               <option value="" disabled>Select a vehicle</option>
 
             </select>

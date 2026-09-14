@@ -65,6 +65,23 @@ export default function TripForm({
           </select>
         </div>
         {/* build it for drivers! copy and change based on the above. */}
+        <div className="form-control w-full">
+          <div className="label pb-1">
+            <span className="label-text font-medium">Driver</span>
+          </div>
+          <select
+            name="driver"
+            value={form.driver}
+            onChange={handleChange}
+            className="select select-bordered w-full"
+            required
+          >
+            <option value="" disabled>Select a driver</option>
+            {drivers.map((driver) => {
+              {driver.name} {driver.license_number}
+            })}
+          </select>
+        </div>
         <div className="card-actions justify-end pt-2">
           <button type="submit" className="btn btn-primary">Create Trip</button>
         </div>

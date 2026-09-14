@@ -94,7 +94,9 @@ export default function TripForm({
             </div>
             <input
               type="text"
-
+              name="start_location"
+              value={form.start_location}
+              onChange={handleChange}
               className="input input-bordered w-full"
               placeholder="e.g. Warehouse A"
               required
@@ -109,7 +111,9 @@ export default function TripForm({
             </div>
             <input
               type="text"
-
+              name="end_location"
+              value={form.end_location}
+              onChange={handleChange}
               className="input input-bordered w-full"
               placeholder="e.g. Warehouse A"
               required

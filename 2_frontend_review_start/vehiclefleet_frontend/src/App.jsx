@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 
 import VehiclesAndDriversPage from './pages/VehiclesAndDriversPage'
+import CreateTripPage from './pages/CreateTripPage'
 
 function App() {
   // wrap the entire thing in a browser router.
@@ -38,6 +39,10 @@ function App() {
             <Route
               path="/"
               element={<VehiclesAndDriversPage />}
+            />
+            <Route
+              path="/trips/new"
+              element={<CreateTripPage />}
             />
           </Routes>
         </main>

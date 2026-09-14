@@ -23,6 +23,11 @@ export default function TripForm({
   // EMPTY_FORM the original value of form.
 
   function handleChange(event) {
+    console.log("handleChange")
+    console.log(form)
+    console.log({
+      [event.target.name]: event.target.value
+    })
     setForm({
       ...form, // spreading all existing values of form into the new obj
       [event.target.name]: event.target.value // i'm using the name of target and setting to the value.
@@ -46,12 +51,14 @@ export default function TripForm({
           </div>
           <select
             name="vehicle"
+            value={form.vehicle}
+            onChange={handleChange}
             className="select select-bordered w-full"
             required
           >
             <option value="" disabled>Select a vehicle</option>
             {vehicles.map((vehicle) => {
-              return <option key={vehicle.id}>
+              return <option key={vehicle.id} value={vehicle.id}>
                 {vehicle.year} {vehicle.make} {vehicle.model} - {vehicle.license_plate}
               </option>
             })}

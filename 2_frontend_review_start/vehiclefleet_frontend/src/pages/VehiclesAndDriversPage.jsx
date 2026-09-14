@@ -1,4 +1,6 @@
-
+// Import both components for vehicles and drivers
+// import the mock data
+// use "dat" knowledge of jsx to render the lists.
 
 // name your components the same as the file.
 export default function VehiclesAndDriversPage() {

@@ -78,7 +78,9 @@ export default function TripForm({
           >
             <option value="" disabled>Select a driver</option>
             {drivers.map((driver) => {
-              {driver.name} {driver.license_number}
+              return <option key={driver.id} value={driver.id}>
+                {driver.name} {driver.license_number}
+              </option>
             })}
           </select>
         </div>

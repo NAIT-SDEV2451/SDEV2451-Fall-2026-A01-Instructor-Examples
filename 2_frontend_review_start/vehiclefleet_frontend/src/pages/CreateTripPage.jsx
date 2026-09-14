@@ -18,5 +18,6 @@ export default function CreateTripPage() {
       vehicles={VEHICLES}
       drivers={DRIVERS}
     />
+    {/* passing a reference to the function. */}
   </div>
 }

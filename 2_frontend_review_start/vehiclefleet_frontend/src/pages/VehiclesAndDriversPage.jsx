@@ -10,7 +10,7 @@ export default function VehiclesAndDriversPage() {
     </section>
     <section>
       <h2 className="text-xl font-semibold mb-3">
-        Vehicles
+        Drivers
       </h2>
     </section>
   </div>

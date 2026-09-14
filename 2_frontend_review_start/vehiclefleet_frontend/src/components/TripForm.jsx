@@ -84,6 +84,38 @@ export default function TripForm({
             })}
           </select>
         </div>
+        <div className="divider divider-start text-xs text-base-content/50 mt-0 mb-0">Route</div>
+
+        {/* to hook up the state to both inputs. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="form-control w-full">
+            <div className="label pb-1">
+              <span className="label-text font-medium">Start Location</span>
+            </div>
+            <input
+              type="text"
+
+              className="input input-bordered w-full"
+              placeholder="e.g. Warehouse A"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="form-control w-full">
+            <div className="label pb-1">
+              <span className="label-text font-medium">End Location</span>
+            </div>
+            <input
+              type="text"
+
+              className="input input-bordered w-full"
+              placeholder="e.g. Warehouse A"
+              required
+            />
+          </div>
+        </div>
         <div className="card-actions justify-end pt-2">
           <button type="submit" className="btn btn-primary">Create Trip</button>
         </div>

@@ -7,6 +7,8 @@ import {
   NavLink
 } from 'react-router-dom'
 
+import VehiclesAndDriversPage from './pages/VehiclesAndDriversPage'
+
 function App() {
   // wrap the entire thing in a browser router.
   return (
@@ -27,6 +29,10 @@ function App() {
           <Routes>
             {/* each route is going to have a path
             and an element which is a component */}
+            <Route
+              path="/"
+              element={<VehiclesAndDriversPage />}
+            />
           </Routes>
         </main>
       </div>

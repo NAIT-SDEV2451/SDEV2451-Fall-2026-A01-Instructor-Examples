@@ -45,6 +45,7 @@ export default function TripForm({
   return <div className="card bg-base-100 shadow-md w-full max-w-xl">
     <div className="card-body gap-5">
       <form className="flex flex-col gap-5">
+        {/* Vehicle select */}
         <div className="form-control w-full">
           <div className="label pb-1">
             <span className="label-text font-medium">Vehicle</span>
@@ -65,6 +66,7 @@ export default function TripForm({
           </select>
         </div>
         {/* build it for drivers! copy and change based on the above. */}
+        {/* Driver Select */}
         <div className="form-control w-full">
           <div className="label pb-1">
             <span className="label-text font-medium">Driver</span>
@@ -84,9 +86,14 @@ export default function TripForm({
             })}
           </select>
         </div>
-        <div className="divider divider-start text-xs text-base-content/50 mt-0 mb-0">Route</div>
+        {/* A title for our new section. */}
+        <div className="divider divider-start text-xs text-base-content/50 mt-0 mb-0">
+          Route
+        </div>
 
-        {/* to hook up the state to both inputs. */}
+
+        {/* Start Location
+        to hook up the state to both inputs. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="form-control w-full">
             <div className="label pb-1">
@@ -103,7 +110,7 @@ export default function TripForm({
             />
           </div>
         </div>
-
+        {/* End Location */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="form-control w-full">
             <div className="label pb-1">
@@ -120,6 +127,8 @@ export default function TripForm({
             />
           </div>
         </div>
+
+
         <div className="card-actions justify-end pt-2">
           <button type="submit" className="btn btn-primary">Create Trip</button>
         </div>

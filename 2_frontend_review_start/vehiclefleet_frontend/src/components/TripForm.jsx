@@ -44,7 +44,11 @@ export default function TripForm({
 
   return <div className="card bg-base-100 shadow-md w-full max-w-xl">
     <div className="card-body gap-5">
-      <form className="flex flex-col gap-5">
+      {/* handle the onSubmit enve */}
+      <form
+        onSubmit={submitHandler}
+        className="flex flex-col gap-5"
+      >
         {/* Vehicle select */}
         <div className="form-control w-full">
           <div className="label pb-1">

@@ -127,7 +127,24 @@ export default function TripForm({
             />
           </div>
         </div>
-
+        {/* Schedule Title */}
+        <div className="divider divider-start text-xs text-base-content/50 mt-0 mb-0">
+          Schedule
+        </div>
+        {/* start time */}
+        <div className="form-control w-full">
+          <div className="label pb-1">
+            <span className="label-text font-medium">Start Time</span>
+          </div>
+          <input
+            type="datetime-local"
+            name="start_time"
+            value={form.start_time}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
 
         <div className="card-actions justify-end pt-2">
           <button type="submit" className="btn btn-primary">Create Trip</button>

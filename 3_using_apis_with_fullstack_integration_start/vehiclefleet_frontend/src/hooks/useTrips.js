@@ -1,8 +1,10 @@
 import {
-  useQuery
+  useQuery,
+  useMutation,
+  useQueryClient
 } from '@tanstack/react-query'
 
-import { fetchTrips } from '../api/fleet'
+import { fetchTrips, createTrip } from '../api/fleet'
 
 // there's multiple ways to do this
 // because we're going to make two hooks
@@ -17,6 +19,7 @@ export function useTrips() {
     error
   } = useQuery({
     queryKey: ['trips'],
+    // the key that will be invalidated by useTrips
     queryFn: fetchTrips
   });
   return {
@@ -25,4 +28,25 @@ export function useTrips() {
     isError,
     error,
   }
+}
+
+export function useCreateTrip() {
+  // create/change data on the server
+  // and we want our state to reflect
+  // these changes on the frontend.
+
+  // we get the queryClient
+  const queryClient = useQueryClient()
+
+  // make the mutation creating the data
+  return useMutation({
+    mutationFn: createTrip,
+    onSuccess: () => { // if it's a 200ish status
+      // we're going to invalidate the queryKey
+      queryClient.invalidateQueries({
+        queryKey: ['trips']
+      })
+    }
+  })
+
 }

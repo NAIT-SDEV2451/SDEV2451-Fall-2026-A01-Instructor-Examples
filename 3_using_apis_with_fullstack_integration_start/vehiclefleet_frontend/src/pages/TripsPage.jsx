@@ -11,6 +11,7 @@ function TripsPage() {
     error
   } = useTrips()
 
+  // guards for errors and loading.
   if (isLoading) {
     return <div>
       <h2 className="text-xl font-semibold mb-3">Trips</h2>
@@ -29,7 +30,6 @@ function TripsPage() {
       </div>
     </div>
   }
-
 
   return (
     <div>

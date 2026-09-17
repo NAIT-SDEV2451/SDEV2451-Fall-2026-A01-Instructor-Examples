@@ -7,7 +7,8 @@ function TripsPage() {
   const {
     trips,
     isLoading,
-    isError
+    isError,
+    error
   } = useTrips()
 
   if (isLoading) {
@@ -24,6 +25,7 @@ function TripsPage() {
         className="text-md"
       >
         An error has occurred.
+        {error.toString()}
       </div>
     </div>
   }

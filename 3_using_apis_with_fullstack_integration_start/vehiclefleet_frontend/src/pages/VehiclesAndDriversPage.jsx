@@ -4,6 +4,7 @@ import { VEHICLES, DRIVERS } from '../mockData'
 // let's import our hook here which takes care of the request
 // end to end with our state.
 import { useVehicles } from '../hooks/useVehicles'
+import { useDrivers } from '../hooks/useDrivers'
 
 function VehiclesAndDriversPage() {
   // load the vehicles
@@ -11,6 +12,11 @@ function VehiclesAndDriversPage() {
     vehicles, // the data,
     isLoading: loadingVehicles, //obj destructuring techinque
   } = useVehicles()
+
+  const {
+    drivers,
+    isLoading: loadingDrivers
+  } = useDrivers()
 
   return (
     <div className="flex flex-col gap-8">
@@ -25,7 +31,10 @@ function VehiclesAndDriversPage() {
 
       <section>
         <h2 className="text-xl font-semibold mb-3">Drivers</h2>
-        <DriverList drivers={DRIVERS} />
+         { loadingDrivers
+          ? <span className="loading loading-spinner loading-md"></span>
+          : <DriverList drivers={drivers} />
+         }
       </section>
     </div>
   )

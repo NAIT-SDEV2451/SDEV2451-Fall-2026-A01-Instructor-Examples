@@ -34,3 +34,27 @@ export async function fetchDrivers() {
   }
   return response.json()
 }
+
+export async function fetchTrips() {
+  const response = await fetch(`${BASE_URL}/trips/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch trips')
+  }
+  return response.json()
+}
+
+// data is an object.
+export async function createTrip(data) {
+  // create data on the server (post request)
+  const response = await fetch(`${BASE_URL}/trips/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  if (!response.ok) {
+    throw new Error('Failed create trip')
+  }
+  return response.json()
+}

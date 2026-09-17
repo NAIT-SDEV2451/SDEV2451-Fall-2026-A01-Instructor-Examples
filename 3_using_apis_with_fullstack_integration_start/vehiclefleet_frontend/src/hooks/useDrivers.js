@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { fetchDrivers } from '../api/fleet'
 
-export async function useDrivers() {
+export function useDrivers() {
   const {
     data: drivers = [],
     isLoading,
@@ -11,7 +11,7 @@ export async function useDrivers() {
   } = useQuery({
     queryKey: ['drivers'],
     queryFn: fetchDrivers
-  })
+  });
   return {
     drivers,
     isLoading,

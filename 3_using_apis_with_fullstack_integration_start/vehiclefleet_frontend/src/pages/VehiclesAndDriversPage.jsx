@@ -12,9 +12,6 @@ function VehiclesAndDriversPage() {
     isLoading: loadingVehicles, //obj destructuring techinque
   } = useVehicles()
 
-  console.log("vehicles", vehicles)
-  console.log("loadingVehicles", loadingVehicles)
-
   return (
     <div className="flex flex-col gap-8">
       <section>

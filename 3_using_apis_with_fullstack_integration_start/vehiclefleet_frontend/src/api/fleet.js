@@ -25,5 +25,12 @@ export async function fetchVehicles() {
   // if it hits here it should be okay
   // parsing the data from the response.
   return response.json()
+}
 
+export async function fetchDrivers() {
+  const response = await fetch(`${BASE_URL}/drivers/`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch vehicles')
+  }
+  return response.json()
 }

@@ -36,7 +36,7 @@ class FleetStatsView(APIView):
 
         # filter the last 12 months of data.
         twelve_months_ago = timezone.now() - timedelta(weeks=52)
-        weekly_avg_distance = (
+        weekly_avg_distance = list(  # we're making a list of value rather than a queryset.
             Trip.objects.filter(
                 start_time__gte=twelve_months_ago,  # start before 12 months ago. __gte is greater or equal than
                 distance__isnull=False,  # we're selecting all distance that arent' null
@@ -46,19 +46,29 @@ class FleetStatsView(APIView):
                 week=TruncWeek("start_time"),  # a new field called week.
             )
             .values("week")
+            .annotate(
+                # annotate a second value for the average distance per week.
+                avg_distance=Avg("distance")  # creating a new field called avg_distance
+            )
+            .order_by("week")
+            .values_list("week", "avg_distance")
         )
-        # annotate a second value for the average distance per week.
-        # order by the week
-        # return the values list.
-
-        breakpoint()
-
+        # formatting the dates in a nicer format.
+        formatted_weekly_avg_distance = []
+        for weekly_avg_item in weekly_avg_distance:
+            formatted_weekly_avg_distance.append(
+                {
+                    "week": weekly_avg_item[0].strftime("%Y-%m-%d"),
+                    "avg_distance": round(float(weekly_avg_item[1]), 2),
+                }
+            )
         return Response(
             {
+                "avg_distance_per_week": formatted_weekly_avg_distance,
+                "average_distance": avg,
                 "total_vehicles": Vehicle.objects.count(),
                 "total_drivers": Driver.objects.count(),
                 "total_trips": Trip.objects.count(),
-                "average_distance": avg,
             }
         )
 

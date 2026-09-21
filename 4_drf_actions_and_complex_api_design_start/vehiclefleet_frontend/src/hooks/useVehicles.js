@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import {
+  useQuery,
+  keepPreviousData,
+} from '@tanstack/react-query'
 import { fetchVehicles } from '../api/fleet'
-
-
 
 export function useVehicles(search = "") {
   console.log(search)
@@ -13,6 +14,9 @@ export function useVehicles(search = "") {
       // on the right is the actual value.
       search: search
     }),
+    // we're going to remove the blinking by setting
+    // the placeholder to the older data.
+    placeholderData: keepPreviousData,
   })
   return { vehicles, isLoading, isError, error }
 }

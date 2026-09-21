@@ -36,11 +36,17 @@ class FleetStatsView(APIView):
 
         # filter the last 12 months of data.
         twelve_months_ago = timezone.now() - timedelta(weeks=52)
-        weekly_avg_distance = Trip.objects.filter(
-            start_time__gte=twelve_months_ago,  # start before 12 months ago. __gte is greater or equal than
-            distance__isnull=False,  # we're selecting all distance that arent' null
+        weekly_avg_distance = (
+            Trip.objects.filter(
+                start_time__gte=twelve_months_ago,  # start before 12 months ago. __gte is greater or equal than
+                distance__isnull=False,  # we're selecting all distance that arent' null
+            )
+            .annotate(
+                # annotate (create a new field) of the week, do it with some db functions
+                week=TruncWeek("start_time"),  # a new field called week.
+            )
+            .values("week")
         )
-        # annotate (create a new field) of the week, do it with some db functions
         # annotate a second value for the average distance per week.
         # order by the week
         # return the values list.

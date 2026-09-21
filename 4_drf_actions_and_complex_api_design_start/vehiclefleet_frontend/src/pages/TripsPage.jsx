@@ -1,8 +1,10 @@
 import TripList from '../components/TripList'
+import StatCard from '../components/StatCard'
+import AverageDistanceChart from '../components/AverageDistanceChart'
+
 import { useTrips } from '../hooks/useTrips'
 import { useStats } from '../hooks/useStats'
 
-import StatCard from '../components/StatCard'
 
 const STAT_CARDS = [
   { key: 'total_vehicles',    label: 'Total Vehicles',        color: 'bg-primary text-primary-content' },
@@ -14,8 +16,6 @@ const STAT_CARDS = [
 function TripsPage() {
   const { trips, isLoading } = useTrips()
   const {stats} = useStats()
-
-  console.log(stats)
 
   return (
     <div className="flex flex-col gap-6">
@@ -33,6 +33,8 @@ function TripsPage() {
         })}
       </div>
 
+      {/* our distance chart. */}
+      <AverageDistanceChart data={[]} />
 
       {/* Our Existing pieces. */}
       <h2 className="text-xl font-semibold mb-3">Trips</h2>

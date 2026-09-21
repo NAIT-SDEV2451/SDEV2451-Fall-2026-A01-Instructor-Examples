@@ -12,18 +12,21 @@ from fleet.serializers import DriverSerializer, TripSerializer, VehicleSerialize
 class FleetStatsView(APIView):
 
     def get(self, request):
+        # aggregate is on all of the data
+        # annotate is like a group by on the data.
         # average of all distances of our trips.
+        # aggregates are on the full dataset.
         avg = Trip.objects.aggregate(
             avg_distance=Avg("distance"),  # making a new field and getting that info
         )["avg_distance"]
-
+        # the aggregate gives us a dictionary and we're accessing the key "avg_distance" that we created
         breakpoint()
-
         return Response(
             {
                 "total_vehicles": Vehicle.objects.count(),
                 "total_drivers": Driver.objects.count(),
                 "total_trips": Trip.objects.count(),
+                "average_distance": avg,
             }
         )
 

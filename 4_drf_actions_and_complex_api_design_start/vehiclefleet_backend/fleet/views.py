@@ -65,7 +65,7 @@ class FleetStatsView(APIView):
         return Response(
             {
                 "avg_distance_per_week": formatted_weekly_avg_distance,
-                "average_distance": avg,
+                "average_distance": round(avg, 2),
                 "total_vehicles": Vehicle.objects.count(),
                 "total_drivers": Driver.objects.count(),
                 "total_trips": Trip.objects.count(),

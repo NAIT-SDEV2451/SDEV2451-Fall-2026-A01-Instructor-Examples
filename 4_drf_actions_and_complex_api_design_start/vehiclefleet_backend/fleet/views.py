@@ -1,5 +1,16 @@
+# we're going to need timedelta to subtract time.
+from datetime import timedelta
+
+# import django timezone which is how we get datetimenow that tz aware.
+from django.utils import timezone
+
+# we're going to import truncweek which is a db function
+from django.db.models.functions import TruncWeek
+
 # import the average here.
 from django.db.models import Count, Avg
+
+
 from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,7 +31,22 @@ class FleetStatsView(APIView):
             avg_distance=Avg("distance"),  # making a new field and getting that info
         )["avg_distance"]
         # the aggregate gives us a dictionary and we're accessing the key "avg_distance" that we created
+
+        # weekly average distance, avg in groups of weeks.
+
+        # filter the last 12 months of data.
+        twelve_months_ago = timezone.now() - timedelta(weeks=52)
+        weekly_avg_distance = Trip.objects.filter(
+            start_time__gte=twelve_months_ago,  # start before 12 months ago. __gte is greater or equal than
+            distance__isnull=False,  # we're selecting all distance that arent' null
+        )
+        # annotate (create a new field) of the week, do it with some db functions
+        # annotate a second value for the average distance per week.
+        # order by the week
+        # return the values list.
+
         breakpoint()
+
         return Response(
             {
                 "total_vehicles": Vehicle.objects.count(),

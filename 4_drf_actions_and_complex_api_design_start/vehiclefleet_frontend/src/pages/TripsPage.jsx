@@ -19,6 +19,7 @@ function TripsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {STAT_CARDS.map(({key, label, color})=> {
           return <StatCard
+            key={key}
             label={label}
             color={color}
             value={100}

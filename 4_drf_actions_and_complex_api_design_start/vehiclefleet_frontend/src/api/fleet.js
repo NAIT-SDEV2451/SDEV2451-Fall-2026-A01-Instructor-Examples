@@ -33,3 +33,9 @@ export async function createTrip(data) {
   if (!response.ok) throw new Error('Failed to create trip')
   return response.json()
 }
+
+export async function fetchStats() {
+  const response = await fetch(`${BASE_URL}/stats/`)
+  if (!response.ok) throw new Error('Failed to fetch stats')
+  return response.json()
+}

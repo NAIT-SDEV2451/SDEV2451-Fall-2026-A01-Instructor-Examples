@@ -1,7 +1,13 @@
 const BASE_URL = 'http://localhost:8000/api/v1'
 
-export async function fetchVehicles() {
-  const response = await fetch(`${BASE_URL}/vehicles/`)
+export async function fetchVehicles({search}) {
+  let url = `${BASE_URL}/vehicles/`
+  if (search) {
+    url = `${url}?search=${encodeURIComponent(search)}`
+  }
+  console.log(search)
+  console.log(url)
+  const response = await fetch(url)
   if (!response.ok) throw new Error('Failed to fetch vehicles')
   return response.json()
 }

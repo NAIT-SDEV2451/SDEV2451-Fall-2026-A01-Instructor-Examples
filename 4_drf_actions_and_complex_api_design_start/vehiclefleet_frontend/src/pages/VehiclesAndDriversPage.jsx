@@ -8,7 +8,12 @@ import { useDrivers } from '../hooks/useDrivers'
 function VehiclesAndDriversPage() {
   const [vehicleSearch, setVehicleSearch] = useState("")
 
-  const { vehicles, isLoading: loadingVehicles } = useVehicles()
+  const {
+    vehicles,
+    isLoading: loadingVehicles,
+  } = useVehicles(
+    vehicleSearch // pass in our stateful value
+  )
   const { drivers, isLoading: loadingDrivers } = useDrivers()
 
   return (

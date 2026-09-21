@@ -11,6 +11,12 @@ function VehiclesAndDriversPage() {
     <div className="flex flex-col gap-8">
       <section>
         <h2 className="text-xl font-semibold mb-3">Vehicles</h2>
+        <input
+          type="text"
+          placeholder="search by make model or plate"
+          className="input input-bordered w-full max-w-sm mb-3"
+        />
+
         {loadingVehicles
           ? <span className="loading loading-spinner loading-md" />
           : <VehicleList vehicles={vehicles} />

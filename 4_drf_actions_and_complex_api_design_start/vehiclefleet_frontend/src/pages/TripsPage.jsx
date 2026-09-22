@@ -34,7 +34,8 @@ function TripsPage() {
       </div>
 
       {/* our distance chart. */}
-      <AverageDistanceChart data={[]} />
+      <AverageDistanceChart
+        data={stats.avg_distance_per_week} />
 
       {/* Our Existing pieces. */}
       <h2 className="text-xl font-semibold mb-3">Trips</h2>

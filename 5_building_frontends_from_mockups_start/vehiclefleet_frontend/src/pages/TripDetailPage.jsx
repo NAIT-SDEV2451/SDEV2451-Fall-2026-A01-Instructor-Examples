@@ -1,7 +1,8 @@
 // let's get the first trip from the mockdata
 import { TRIPS } from "../mockData";
 import BackButton from "../components/BackButton";
-
+import TripMap from "../components/TripMap";
+import TripInfo from "../components/TripInfo";
 export default function TripDetailPage() {
   // let's select the one
   const trip = TRIPS[4] // in our mock data the endtime for the 4 is null
@@ -21,7 +22,16 @@ export default function TripDetailPage() {
           }
         </div>
       </div>
-
+      <TripMap
+        startLocation={trip.start_location}
+        endLocation={trip.end_location}
+      />
+      <div className="flex flex-wrap gap-2">
+        <button className="btn btn-outline">Get Directions</button>
+        <button className="btn btn-outline">Complete Trip</button>
+        <button className="btn btn-outline">Can't Be Delivered</button>
+      </div>
+      <TripInfo trip={trip} />
     </div>
   </>
 }

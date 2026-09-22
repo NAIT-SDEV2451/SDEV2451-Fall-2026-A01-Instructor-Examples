@@ -49,8 +49,30 @@ export default function AverageDistanceChart({
         >
           <CartesianGrid strokeDasharray="3 3"/>
 
-          <XAxis dataKey={"week"} tick={{ fontSize: 12}} />
-          <YAxis unit=" km" width={70} tick={{ fontSize: 12}}/>
+          <XAxis
+            dataKey={"week"}
+            tick={{
+              fontSize: 12,
+              fill: "red"
+            }}
+            className={`text-dark`} />
+          <YAxis
+            unit=" km"
+            width={70}
+            tick={{
+              fontSize: 12,
+              fill: "blue"
+            }}
+          />
+          {/* ToolTip this is for the on hover value will be the y axis.*/}
+
+          <Tooltip
+            formatter={(value) => {
+              return [
+                `${value} km`, "Avg Distance"
+              ]
+            }}
+          />
 
           {/* Let's make the bars */}
           <Bar

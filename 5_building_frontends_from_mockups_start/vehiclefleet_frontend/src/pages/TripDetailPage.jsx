@@ -56,9 +56,11 @@ export default function TripDetailPage() {
         {/* Title */}
         <div class="flex items-center gap-3">
           <h1 className="text-3xl font-bold">Trip #{trip.id}</h1>
-          { isInProgress &&
-            <span className="badge badge-info">In Progress</span>
-          }
+          {/* Let's update our badge. */}
+          <span className={`badge ${STATUS_BADGE[trip.status]}`}>
+            {STATUS_LABEL[trip.status]}
+          </span>
+
         </div>
       </div>
       <TripMap

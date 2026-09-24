@@ -6,6 +6,7 @@ import TripMap from "../components/TripMap";
 import TripInfo from "../components/TripInfo";
 
 import { useTripDetails } from "../hooks/useTripDetails";
+import { startTrip } from "../api/fleet";
 
 // we're going to use this on the badge.
 // a note you could put this in a trip status component.
@@ -31,11 +32,10 @@ export default function TripDetailPage() {
     completeTripMutation
   } = useTripDetails(id)
 
-  console.log("params", id)
-  // let's select the one
-  // const trip = TRIPS[4] // in our mock data the endtime for the 4 is null
-  // create a variable called in progress to see if the end time is null
-  const isInProgress = trip.end_time === null
+  const start = () => {
+    startTripMutation.mutate()
+  }
+
 
   // let's put a couple guards
   if (isLoading) {
@@ -69,8 +69,24 @@ export default function TripDetailPage() {
       />
       <div className="flex flex-wrap gap-2">
         <button className="btn btn-outline">Get Directions</button>
-        <button className="btn btn-outline">Complete Trip</button>
-        <button className="btn btn-outline">Can't Be Delivered</button>
+        {/* Let's handle some functionality where we should
+        different buttons based on the status */}
+        { trip.status == "pending"
+          && <>
+            {/* I don't want to be able to click it if its pending. */}
+            <button
+              className="btn btn-outline"
+              onClick={start}
+              disabled={startTripMutation.isPending}
+            >Start Trip</button>
+          </>
+        }
+        { trip.status == "in_progress"
+          && <>
+            <button className="btn btn-outline">Complete Trip</button>
+            <button className="btn btn-outline">Can't Be Delivered</button>
+          </>
+        }
       </div>
       <TripInfo trip={trip} />
     </div>

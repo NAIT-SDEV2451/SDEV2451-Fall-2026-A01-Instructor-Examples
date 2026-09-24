@@ -14,7 +14,7 @@ export default function TripDetailPage() {
   const {
     trip, isLoading, isError, error, startTripMutation,
     completeTripMutation
-  } = useTripDetails()
+  } = useTripDetails(id)
 
   console.log("params", id)
   // let's select the one

@@ -2,6 +2,7 @@
 import TripCard from "./TripCard";
 
 export default function TripInfo({trip}) {
+  console.log(trip)
   const {
     vehicle_detail,
     driver_detail,

@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function TripList({ trips }) {
   return (
@@ -32,7 +32,9 @@ function TripList({ trips }) {
                 )}
               </td>
               <td>
-                <Link to={`/trips/${trip.id}`} className="btn btn-xs btn-ghost" />
+                <Link to={`/trips/${trip.id}`} className="btn btn-xs btn-ghost">
+                  View
+                </Link>
               </td>
             </tr>
           ))}

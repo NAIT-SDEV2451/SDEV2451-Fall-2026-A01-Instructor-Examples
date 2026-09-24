@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 function TripList({ trips }) {
   return (
     <div className="overflow-x-auto">
@@ -11,6 +13,8 @@ function TripList({ trips }) {
             <th>To</th>
             <th>Start Time</th>
             <th>Distance (km)</th>
+            {/* empty header for the button to navigate. */}
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +30,9 @@ function TripList({ trips }) {
                 {trip.distance ?? (
                   <span className="badge badge-warning badge-sm">In progress</span>
                 )}
+              </td>
+              <td>
+                <Link to={`/trips/${trip.id}`} className="btn btn-xs btn-ghost" />
               </td>
             </tr>
           ))}

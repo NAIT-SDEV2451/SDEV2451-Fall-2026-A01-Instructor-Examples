@@ -83,6 +83,7 @@ export default function TripDetailPage() {
         }
         { trip.status == "in_progress"
           && <>
+            {/* do it for complete trip. */}
             <button className="btn btn-outline">Complete Trip</button>
             <button className="btn btn-outline">Can't Be Delivered</button>
           </>

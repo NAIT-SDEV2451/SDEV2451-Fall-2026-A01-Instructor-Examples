@@ -1,13 +1,37 @@
+import { useParams } from "react-router-dom";
 // let's get the first trip from the mockdata
 import { TRIPS } from "../mockData";
 import BackButton from "../components/BackButton";
 import TripMap from "../components/TripMap";
 import TripInfo from "../components/TripInfo";
+
+import { useTripDetails } from "../hooks/useTripDetails";
+
 export default function TripDetailPage() {
+  // I want to get the id from the url.
+  const { id } = useParams()
+
+  const {
+    trip, isLoading, isError, error, startTripMutation,
+    completeTripMutation
+  } = useTripDetails()
+
+  console.log("params", id)
   // let's select the one
-  const trip = TRIPS[4] // in our mock data the endtime for the 4 is null
+  // const trip = TRIPS[4] // in our mock data the endtime for the 4 is null
   // create a variable called in progress to see if the end time is null
   const isInProgress = trip.end_time === null
+
+  // let's put a couple guards
+  if (isLoading) {
+    return <span className="loading loading-spinner loading-lg"></span>
+  }
+
+  if (isError || !trip) {
+    return <p className="text-error">
+      error {error.toString()}
+    </p>
+  }
 
   return <>
     <div className="flex flex-col gap-6">

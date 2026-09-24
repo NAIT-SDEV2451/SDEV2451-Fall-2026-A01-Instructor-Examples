@@ -27,7 +27,7 @@ export function useTripDetails(id) {
   })
 
   // let's create our mutations
-  const startTrip = useMutation({
+  const startTripMutation = useMutation({
     mutationFn: () => startTrip(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -36,7 +36,7 @@ export function useTripDetails(id) {
     }
   })
 
-  const completeTrip = useMutation({
+  const completeTripMutation = useMutation({
     mutationFn: () => completeTrip(id),
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -44,4 +44,9 @@ export function useTripDetails(id) {
       })
     }
   })
+
+  return {
+    trip, isLoading, isError, error, startTripMutation,
+    completeTripMutation
+  }
 }

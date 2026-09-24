@@ -7,6 +7,21 @@ import TripInfo from "../components/TripInfo";
 
 import { useTripDetails } from "../hooks/useTripDetails";
 
+// we're going to use this on the badge.
+// a note you could put this in a trip status component.
+const STATUS_BADGE = {
+  pending: "badge-ghost",
+  in_progress: "badge-info",
+  completed: "badge-success",
+  failed: "badge-error",
+}
+const STATUS_LABEL = {
+  pending: "Pending",
+  in_progress: "In Progress",
+  completed: "Completed",
+  failed: "Failed",
+}
+
 export default function TripDetailPage() {
   // I want to get the id from the url.
   const { id } = useParams()

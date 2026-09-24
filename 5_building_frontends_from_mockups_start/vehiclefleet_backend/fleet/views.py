@@ -84,7 +84,7 @@ class TripViewSet(ModelViewSet):
         trip = self.get_object()
         needs_save = False
         geocoded_start = False
-        breakpoint()
+
         if trip.start_lat is None or trip.start_lng is None:
             geolocator = Nominatim(user_agent="vehiclefleet-app-dan-m-1234")
             result = geolocator.geocode(trip.start_location)

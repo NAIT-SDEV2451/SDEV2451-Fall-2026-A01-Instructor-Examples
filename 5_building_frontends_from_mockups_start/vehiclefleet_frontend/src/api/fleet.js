@@ -41,19 +41,25 @@ export async function createTrip(data) {
 }
 
 export async function fetchTripMap(id) {
-  const response = await fetch(`${BASE_URL}/trips/${id}/map/`)
+  const response = await fetch(
+    `${BASE_URL}/trips/${id}/map/`
+  )
   if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
   return response.json()
 }
 
 export async function completeTrip(id) {
-  const response = await fetch(`${BASE_URL}/trips/${id}/complete/`)
+  const response = await fetch(
+    `${BASE_URL}/trips/${id}/complete/`
+  )
   if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
   return response.json()
 }
 
 export async function startTrip(id) {
-  const response = await fetch(`${BASE_URL}/trips/${id}/start/`)
+  const response = await fetch(
+    `${BASE_URL}/trips/${id}/start/`
+  )
   if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
   return response.json()
 }

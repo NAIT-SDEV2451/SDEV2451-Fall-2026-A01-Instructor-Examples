@@ -78,12 +78,13 @@ class TripViewSet(ModelViewSet):
     def get_queryset(self):
         return Trip.objects.select_related("vehicle", "driver").all()
 
+    # /api/v1/trips/idoftrip/map/
     @action(detail=True, methods=["get"])
     def map(self, request, pk=None):
         trip = self.get_object()
         needs_save = False
         geocoded_start = False
-
+        breakpoint()
         if trip.start_lat is None or trip.start_lng is None:
             geolocator = Nominatim(user_agent="vehiclefleet-app-dan-m-1234")
             result = geolocator.geocode(trip.start_location)

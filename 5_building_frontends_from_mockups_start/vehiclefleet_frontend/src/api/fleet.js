@@ -39,3 +39,21 @@ export async function createTrip(data) {
   if (!response.ok) throw new Error('Failed to create trip')
   return response.json()
 }
+
+export async function fetchTripMap(id) {
+  const response = await fetch(`${BASE_URL}/trips/${id}/map/`)
+  if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
+  return response.json()
+}
+
+export async function completeTrip(id) {
+  const response = await fetch(`${BASE_URL}/trips/${id}/complete/`)
+  if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
+  return response.json()
+}
+
+export async function startTrip(id) {
+  const response = await fetch(`${BASE_URL}/trips/${id}/start/`)
+  if (!response.ok) throw new Error(`Failed to fetch trip map ${id}`)
+  return response.json()
+}

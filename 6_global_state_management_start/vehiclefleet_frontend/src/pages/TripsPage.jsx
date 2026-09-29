@@ -25,6 +25,8 @@ function TripsPage() {
   // handle the first page.
   const hasPrevious = page > 1 // or !!trips.previous
 
+  // let's get the number of pages
+
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

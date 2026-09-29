@@ -56,13 +56,12 @@ function App() {
                   {/* the trip details page is the chilren */}
                   <TripsPage />
                 </PaginationProvider>
-
-                } />
-
+              }
+              />
               <Route path="/trips/new" element={<CreateTripPage />} />
 
               <Route path="/trips/:id" element={
-                  <TripDetailPage />
+                <TripDetailPage />
               } />
             </Routes>
           </main>

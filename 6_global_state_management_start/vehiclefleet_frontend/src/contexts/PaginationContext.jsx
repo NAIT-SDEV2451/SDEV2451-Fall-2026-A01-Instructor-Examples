@@ -1,7 +1,7 @@
 // we're going to make a context page controller.
 import { createContext, useState } from "react";
 
-// this is going to "hold" the state that we provide
+// this is going to "hold and expose" the state that we provide
 export const PaginationContext = createContext(null)
 
 // we're going to create a "wrapper" which is going to host
@@ -27,6 +27,7 @@ export default function PaginationProvider({
       page,
       totalCount,
       totalPages,
+      setTotalCount,
       // we're going to create the callbacks to set the pages
       goToNext: (nextPage)=> {
         let safeNextPage = Math.min(nextPage+1, totalPages)

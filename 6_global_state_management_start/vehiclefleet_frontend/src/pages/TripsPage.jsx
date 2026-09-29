@@ -75,7 +75,6 @@ function TripsPage() {
             Next
           </button>
         </div>
-
       </div>
     </div>
   )

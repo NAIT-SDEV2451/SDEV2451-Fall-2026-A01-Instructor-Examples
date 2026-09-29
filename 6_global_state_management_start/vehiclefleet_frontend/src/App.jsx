@@ -4,6 +4,7 @@ import VehiclesAndDriversPage from './pages/VehiclesAndDriversPage'
 import TripsPage from './pages/TripsPage'
 import CreateTripPage from './pages/CreateTripPage'
 import TripDetailPage from './pages/TripDetailPage'
+import PaginationProvider from './contexts/PaginationContext'
 
 const queryClient = new QueryClient()
 
@@ -49,9 +50,20 @@ function App() {
           <main className="p-6 max-w-6xl mx-auto">
             <Routes>
               <Route path="/" element={<VehiclesAndDriversPage />} />
-              <Route path="/trips" element={<TripsPage />} />
+              {/* We're going to wrap just the trip page. */}
+              <Route path="/trips" element={
+                <PaginationProvider pageSize={5}>
+                  {/* the trip details page is the chilren */}
+                  <TripsPage />
+                </PaginationProvider>
+
+                } />
+
               <Route path="/trips/new" element={<CreateTripPage />} />
-              <Route path="/trips/:id" element={<TripDetailPage />} />
+
+              <Route path="/trips/:id" element={
+                  <TripDetailPage />
+              } />
             </Routes>
           </main>
         </div>

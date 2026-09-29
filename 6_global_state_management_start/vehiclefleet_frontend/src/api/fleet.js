@@ -18,8 +18,15 @@ export async function fetchDrivers(search = '') {
   return response.json()
 }
 
-export async function fetchTrips() {
-  const response = await fetch(`${BASE_URL}/trips/`)
+// this now needs a page! pass the page as a param
+export async function fetchTrips(page = 1) {
+  // you could also do it like this.
+  // this is just for the lab
+  let queryParams = new URLSearchParams();
+  queryParams.set('page', page)
+  console.log(`${BASE_URL}/trips/?${queryParams}`)
+
+  const response = await fetch(`${BASE_URL}/trips/?page=${page}`)
   if (!response.ok) throw new Error('Failed to fetch trips')
   return response.json()
 }

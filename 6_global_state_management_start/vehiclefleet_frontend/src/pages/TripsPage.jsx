@@ -19,6 +19,10 @@ function TripsPage() {
   const { trips, isLoading } = useTrips(page)
   const { stats } = useStats()
 
+  if (isLoading) {
+    return <span className="loading loading-spinner loading-md" />
+  }
+
   // let's handle two corner cases
   // the last page.
   const hasNext = !!trips.next // converts to a boolean.
@@ -26,6 +30,8 @@ function TripsPage() {
   const hasPrevious = page > 1 // or !!trips.previous
 
   // let's get the number of pages
+  const pageSize = 5
+  const numPages = Math.ceil(trips.count/pageSize)
 
   return (
     <div className="flex flex-col gap-6">
@@ -59,7 +65,7 @@ function TripsPage() {
           >
             Previous
           </button>
-          <span> 18 trips total</span>
+          <span>Page {page} of {numPages}</span>
           {/* we need to increase the state of the page by one */}
           <button
             className="btn btn-sm btn-outline"

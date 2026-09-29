@@ -19,6 +19,12 @@ function TripsPage() {
   const { trips, isLoading } = useTrips(page)
   const { stats } = useStats()
 
+  // let's handle two corner cases
+  // the last page.
+  const hasNext = !!trips.next // converts to a boolean.
+  // handle the first page.
+  const hasPrevious = page > 1 // or !!trips.previous
+
   return (
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -39,7 +45,28 @@ function TripsPage() {
           ? <span className="loading loading-spinner loading-md" />
           : <TripList trips={trips.results} />
         }
-        {/* Let's add the pagination below here. */}
+        {/* Let's add the pagination below here. the structure will be
+        back button, number of pages, forward button.
+        */}
+        <div className="flex items-center gap-3 mt-4">
+          {/* we need to decrease the state of the page by one */}
+          <button
+            className="btn btn-sm btn-outline"
+            disabled={!hasPrevious}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            Previous
+          </button>
+          <span> 18 trips total</span>
+          {/* we need to increase the state of the page by one */}
+          <button
+            className="btn btn-sm btn-outline"
+            disabled={!hasNext}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next
+          </button>
+        </div>
 
       </div>
     </div>

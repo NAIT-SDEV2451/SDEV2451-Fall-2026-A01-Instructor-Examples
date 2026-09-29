@@ -26,6 +26,7 @@ function TripsPage() {
 
   // check if the trips are loaded and put the total count
   useEffect(()=> {
+    console.log(trips)
     if (!trips.count) {
       return
     }

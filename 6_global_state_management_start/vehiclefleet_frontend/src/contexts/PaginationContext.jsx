@@ -30,12 +30,13 @@ export default function PaginationProvider({
       setTotalCount,
       // we're going to create the callbacks to set the pages
       goToNext: (nextPage)=> {
-        let safeNextPage = Math.min(nextPage+1, totalPages)
+        let safeNextPage = nextPage+1
+        console.log(safeNextPage)
         // this will never go over the page and break
         setPage(safeNextPage)
       },
       goToPrevious: (lastPage)=> {
-        let safeLastPage = Math.max(lastPage - 1, 1)
+        let safeLastPage = lastPage - 1
         // this will never go under the firstpage and break
         setPage(safeLastPage)
       }

@@ -10,7 +10,7 @@ export default function TripsPagination() {
     goToPrevious,
     hasNext,
     hasPrevious,
-  } = usePagination
+  } = usePagination()
 
   return <div className="flex items-center gap-3 mt-4">
     {/* we need to decrease the state of the page by one */}

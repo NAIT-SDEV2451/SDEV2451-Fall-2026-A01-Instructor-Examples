@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import TripList from '../components/TripList'
 import StatCard from '../components/StatCard'
 import AverageDistanceChart from '../components/AverageDistanceChart'
+import TripsPagination from '../components/TripsPagination'
 import { useTrips } from '../hooks/useTrips'
 import { useStats } from '../hooks/useStats'
+// let's import the usePagination hook
+import { usePagination } from '../hooks/usePagination'
+
 
 const STAT_CARDS = [
   { key: 'total_vehicles', label: 'Total Vehicles', color: 'bg-primary text-primary-content' },
@@ -13,25 +17,25 @@ const STAT_CARDS = [
 ]
 
 function TripsPage() {
-  // set the page state
-  const [page, setPage] = useState(1)
+
+  const {page, setTotalCount } = usePagination()
+
   // pass the page into the hook.
   const { trips, isLoading } = useTrips(page)
   const { stats } = useStats()
 
+  // check if the trips are loaded and put the total count
+  useEffect(()=> {
+    if (!trips.count) {
+      return
+    }
+    setTotalCount(trips.count)
+  }, [trips])
+
+
   if (isLoading) {
     return <span className="loading loading-spinner loading-md" />
   }
-
-  // let's handle two corner cases
-  // the last page.
-  const hasNext = !!trips.next // converts to a boolean.
-  // handle the first page.
-  const hasPrevious = page > 1 // or !!trips.previous
-
-  // let's get the number of pages
-  const pageSize = 5
-  const numPages = Math.ceil(trips.count/pageSize)
 
   return (
     <div className="flex flex-col gap-6">
@@ -53,28 +57,7 @@ function TripsPage() {
           ? <span className="loading loading-spinner loading-md" />
           : <TripList trips={trips.results} />
         }
-        {/* Let's add the pagination below here. the structure will be
-        back button, number of pages, forward button.
-        */}
-        <div className="flex items-center gap-3 mt-4">
-          {/* we need to decrease the state of the page by one */}
-          <button
-            className="btn btn-sm btn-outline"
-            disabled={!hasPrevious}
-            onClick={() => setPage((p) => p - 1)}
-          >
-            Previous
-          </button>
-          <span>Page {page} of {numPages}</span>
-          {/* we need to increase the state of the page by one */}
-          <button
-            className="btn btn-sm btn-outline"
-            disabled={!hasNext}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Next
-          </button>
-        </div>
+        <TripsPagination />
       </div>
     </div>
   )

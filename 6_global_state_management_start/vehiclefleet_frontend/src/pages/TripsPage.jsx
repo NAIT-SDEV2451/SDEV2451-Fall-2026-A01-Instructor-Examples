@@ -31,9 +31,9 @@ function TripsPage() {
       return
     }
     setTotalCount(trips.count)
-    notification.showSuccess(
-      "trips loaded successfully"
-    )
+    // notification.showSuccess(
+    //   "trips loaded successfully"
+    // )
   }, [trips])
 
 

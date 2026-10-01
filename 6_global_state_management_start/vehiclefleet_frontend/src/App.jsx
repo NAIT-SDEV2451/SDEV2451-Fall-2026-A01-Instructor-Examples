@@ -5,7 +5,7 @@ import TripsPage from './pages/TripsPage'
 import CreateTripPage from './pages/CreateTripPage'
 import TripDetailPage from './pages/TripDetailPage'
 import PaginationProvider from './contexts/PaginationContext'
-
+import NotificationProvider from './contexts/NotificationContext'
 const queryClient = new QueryClient()
 
 function App() {

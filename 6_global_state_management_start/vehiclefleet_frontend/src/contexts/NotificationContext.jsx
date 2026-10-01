@@ -9,11 +9,11 @@ import Toast from '../components/Toast'
 export const NotificationContext = createContext(null)
 
 // let's create the provider/wrapper to use on the App.
-export function NotificationProvider({children}) {
+export default function NotificationProvider({ children }) {
 
 
-    return <>
-      <Toast />
-      {children}
-    </>
+  return <>
+    <Toast />
+    {children}
+  </>
 }

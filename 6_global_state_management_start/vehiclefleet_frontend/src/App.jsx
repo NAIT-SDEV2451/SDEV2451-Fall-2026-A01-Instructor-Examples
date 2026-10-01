@@ -6,68 +6,71 @@ import CreateTripPage from './pages/CreateTripPage'
 import TripDetailPage from './pages/TripDetailPage'
 import PaginationProvider from './contexts/PaginationContext'
 import NotificationProvider from './contexts/NotificationContext'
+
 const queryClient = new QueryClient()
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className="min-h-screen bg-base-200">
-          <nav className="navbar bg-base-100 shadow px-6">
-            <div className="navbar-start">
-              <span className="text-lg font-bold">Fleet Manager</span>
-            </div>
-            <div className="navbar-end gap-2">
-              <NavLink
-                to="/"
-                end
-                className={({ isActive }) =>
-                  `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
-                }
-              >
-                Vehicles &amp; Drivers
-              </NavLink>
-              <NavLink
-                to="/trips"
-                end
-                className={({ isActive }) =>
-                  `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
-                }
-              >
-                Trips
-              </NavLink>
-              <NavLink
-                to="/trips/new"
-                className={({ isActive }) =>
-                  `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
-                }
-              >
-                Create Trip
-              </NavLink>
-            </div>
-          </nav>
+    <NotificationProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <div className="min-h-screen bg-base-200">
+            <nav className="navbar bg-base-100 shadow px-6">
+              <div className="navbar-start">
+                <span className="text-lg font-bold">Fleet Manager</span>
+              </div>
+              <div className="navbar-end gap-2">
+                <NavLink
+                  to="/"
+                  end
+                  className={({ isActive }) =>
+                    `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
+                  }
+                >
+                  Vehicles &amp; Drivers
+                </NavLink>
+                <NavLink
+                  to="/trips"
+                  end
+                  className={({ isActive }) =>
+                    `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
+                  }
+                >
+                  Trips
+                </NavLink>
+                <NavLink
+                  to="/trips/new"
+                  className={({ isActive }) =>
+                    `btn btn-sm ${isActive ? 'btn-primary' : 'btn-ghost'}`
+                  }
+                >
+                  Create Trip
+                </NavLink>
+              </div>
+            </nav>
 
-          <main className="p-6 max-w-6xl mx-auto">
-            <Routes>
-              <Route path="/" element={<VehiclesAndDriversPage />} />
-              {/* We're going to wrap just the trip page. */}
-              <Route path="/trips" element={
-                <PaginationProvider pageSize={5}>
-                  {/* the trip details page is the chilren */}
-                  <TripsPage />
-                </PaginationProvider>
-              }
-              />
-              <Route path="/trips/new" element={<CreateTripPage />} />
+            <main className="p-6 max-w-6xl mx-auto">
+              <Routes>
+                <Route path="/" element={<VehiclesAndDriversPage />} />
+                {/* We're going to wrap just the trip page. */}
+                <Route path="/trips" element={
+                  <PaginationProvider pageSize={5}>
+                    {/* the trip details page is the chilren */}
+                    <TripsPage />
+                  </PaginationProvider>
+                }
+                />
+                <Route path="/trips/new" element={<CreateTripPage />} />
 
-              <Route path="/trips/:id" element={
-                <TripDetailPage />
-              } />
-            </Routes>
-          </main>
-        </div>
-      </BrowserRouter>
-    </QueryClientProvider>
+                <Route path="/trips/:id" element={
+                  <TripDetailPage />
+                } />
+              </Routes>
+            </main>
+          </div>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </NotificationProvider>
   )
 }
 

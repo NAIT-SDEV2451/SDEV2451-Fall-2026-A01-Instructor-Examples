@@ -5,7 +5,7 @@
 export default function Toast({notification, hide}) {
 
 
-  return <div className="toast toast-top toast-end">
+  return <div className="toast toast-top toast-end z-50 mt-15">
     <div className="alert alert-info">
       <span>New mail arrived.</span>
     </div>

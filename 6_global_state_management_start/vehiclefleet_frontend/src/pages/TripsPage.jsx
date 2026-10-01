@@ -7,7 +7,7 @@ import { useTrips } from '../hooks/useTrips'
 import { useStats } from '../hooks/useStats'
 // let's import the usePagination hook
 import { usePagination } from '../hooks/usePagination'
-
+import { useNotification } from '../hooks/useNotification'
 
 const STAT_CARDS = [
   { key: 'total_vehicles', label: 'Total Vehicles', color: 'bg-primary text-primary-content' },
@@ -17,7 +17,7 @@ const STAT_CARDS = [
 ]
 
 function TripsPage() {
-
+  const notification = useNotification()
   const {page, setTotalCount } = usePagination()
 
   // pass the page into the hook.
@@ -31,6 +31,9 @@ function TripsPage() {
       return
     }
     setTotalCount(trips.count)
+    notification.showSuccess(
+      "trips loaded successfully"
+    )
   }, [trips])
 
 

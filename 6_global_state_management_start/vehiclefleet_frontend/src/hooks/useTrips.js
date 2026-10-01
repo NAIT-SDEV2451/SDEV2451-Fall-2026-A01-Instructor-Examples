@@ -14,6 +14,8 @@ export function useTrips(page = 1) {
   })
 
   return {
+    // here I'm returning the data or an empty array
+    // i'm never going to get the "can't map."
     trips: data ?? [],
     isLoading,
     isError,

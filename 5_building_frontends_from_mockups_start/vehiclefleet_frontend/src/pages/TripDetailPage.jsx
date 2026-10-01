@@ -36,6 +36,9 @@ export default function TripDetailPage() {
     startTripMutation.mutate()
   }
 
+  const end = () => {
+    completeTripMutation.mutate()
+  }
 
   // let's put a couple guards
   if (isLoading) {
@@ -66,6 +69,8 @@ export default function TripDetailPage() {
       <TripMap
         startLocation={trip.start_location}
         endLocation={trip.end_location}
+        endCoordinates={trip.end_coordinates}
+        startCoordinates={trip.start_coordinates}
       />
       <div className="flex flex-wrap gap-2">
         <button className="btn btn-outline">Get Directions</button>
@@ -79,12 +84,20 @@ export default function TripDetailPage() {
               onClick={start}
               disabled={startTripMutation.isPending}
             >Start Trip</button>
+            {/* Note as well add the loading to the button
+            so that it has a spinner! */}
           </>
         }
         { trip.status == "in_progress"
           && <>
             {/* do it for complete trip. */}
-            <button className="btn btn-outline">Complete Trip</button>
+            <button
+              className="btn btn-outline"
+              onClick={end}
+              disabled={completeTripMutation.isPending}
+            >
+              Complete Trip
+            </button>
             <button className="btn btn-outline">Can't Be Delivered</button>
           </>
         }

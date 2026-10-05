@@ -37,7 +37,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # third party apps.
+    "rest_framework",
+    # docs: https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+    "rest_framework_simplejwt",
+    "corsheaders",
+    # we have our own
     "core",
+    "event_tickets",
 ]
 
 AUTH_USER_MODEL = "core.CustomUser"
@@ -124,3 +131,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Set up DRF
+# we're going to make the default class authenticated.
+REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": {}}

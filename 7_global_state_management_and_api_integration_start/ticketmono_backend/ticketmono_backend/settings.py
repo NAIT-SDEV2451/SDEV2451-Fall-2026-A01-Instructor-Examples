@@ -128,9 +128,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Set up DRF
 # we're going to make the default class authenticated.
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": {
+    # this value is an array
+    "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    }
+    ]
 }
 
 # we need to add some configuration for django simple jwt

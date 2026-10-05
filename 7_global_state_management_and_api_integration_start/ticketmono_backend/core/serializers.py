@@ -7,7 +7,29 @@ User = get_user_model()
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    # you could also make the password 1 and 2
     password = serializers.CharField(
         write_only=True,
         min_length=8,
     )
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "password",  # this uses the field above.
+            "role",
+        ]
+
+        extra_kwargs = {
+            "email": {"required": True},
+            "role": {"required": False},  # the default is just user
+        }
+
+    def create(self, validated_data):
+        # this is the orm.
+        return User.objects.create(
+            **validated_data,
+            # the above converts the object to params.
+        )

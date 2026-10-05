@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "event_tickets",
 ]
 
+# get user model get's this bad boy.
 AUTH_USER_MODEL = "core.CustomUser"
 
 MIDDLEWARE = [

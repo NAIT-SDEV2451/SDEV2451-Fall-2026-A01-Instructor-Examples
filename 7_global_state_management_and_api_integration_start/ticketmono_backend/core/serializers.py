@@ -28,6 +28,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        # we could also send a welcome email here
         # this is the orm.
         return User.objects.create(
             **validated_data,

@@ -150,12 +150,13 @@ Let's talk about what this code is doing.
 
 ### 2. Create `core/serializers.py`
 
-The registration serializer validates the incoming JSON and creates the user. The password field is `write_only` so it is accepted on input but never returned in a response.
+The registration serializer validates the incoming JSON and creates the user. The password field is `write_only` so it is accepted on input but never returned in a response, and it is hashed during validation so the plain-text password never makes it into `validated_data`.
 
 ```python
 # core/serializers.py
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 User = get_user_model()
@@ -172,15 +173,20 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "role": {"required": False},
         }
 
+    def validate_password(self, value):
+        return make_password(value)
+
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        return User.objects.create(**validated_data)
 ```
 
 Let's talk about what this code is doing.
 - `get_user_model()` returns whatever model is set as `AUTH_USER_MODEL` — in this project that is `core.CustomUser`. Using `get_user_model()` rather than importing `CustomUser` directly is the correct pattern for code that needs to be compatible with a swappable user model.
 - `write_only=True` on `password` means the field is accepted when deserialising (POST) but excluded when serialising (GET). A password hash should never appear in an API response.
 - `min_length=8` adds a basic length check at the serializer layer before the data reaches the database.
-- `create_user(**validated_data)` uses Django's built-in manager method which hashes the password before saving. Calling `User.objects.create(**validated_data)` instead would store the password as plain text.
+- `validate_password(self, value)` is a field-level validator. DRF automatically calls any method named `validate_<field_name>` after the field's own checks (like `min_length`) pass, and whatever the method returns replaces that field's value in `validated_data`.
+- `make_password(value)` is Django's hashing helper. It turns the plain-text password into a salted hash (e.g. `pbkdf2_sha256$...`) using the hasher configured in `PASSWORD_HASHERS`. After validation, `validated_data["password"]` holds the hash, not the original password.
+- `User.objects.create(**validated_data)` saves the user with the already-hashed password. Because the hashing happened during validation, we use `create` rather than `create_user` — `create_user` would hash the hash, and the user would never be able to log in.
 - `role` is not required. Omitting it leaves the field at its default value (`"user"`), so ordinary registrations do not need to send a role.
 
 ---

@@ -30,6 +30,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # we could also send a welcome email here
         # this is the orm.
+        breakpoint()
         return User.objects.create(
             **validated_data,
             # the above converts the object to params.

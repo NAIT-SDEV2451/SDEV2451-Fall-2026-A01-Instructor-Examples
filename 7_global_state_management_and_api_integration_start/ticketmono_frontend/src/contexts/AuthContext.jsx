@@ -58,6 +58,10 @@ export default function AuthProvider({ children }) {
 
       // return both tokens and the user
       return { tokens, me }
+    },
+    onSuccess: ({tokens, me}) => {
+      setUser(me)
+      setAccessTokenState(tokens.access)
     }
   })
 

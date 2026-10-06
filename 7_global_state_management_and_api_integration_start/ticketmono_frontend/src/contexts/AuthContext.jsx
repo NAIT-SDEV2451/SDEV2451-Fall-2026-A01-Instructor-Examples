@@ -82,16 +82,21 @@ export default function AuthProvider({ children }) {
 
 
   // logout wierdly enough is not a mutation, it's just clearing the AuthState
-
-
-
-
+  function logout() {
+    clearAuthState()
+  }
 
   return <AuthContext.Provider value={{
     user,
     accessToken,
     // functions
-    register: registerMutation.mutate
+    register: registerMutation.mutate,
+    isRegistering: registerMutation.isPending,
+    registerError: registerMutation.error,
+    login: loginMutation.mutate,
+    isLoggingIn: loginMutation.isPending,
+    loginError: loginMutation.error,
+    logout,
 
   }}>
     {children}

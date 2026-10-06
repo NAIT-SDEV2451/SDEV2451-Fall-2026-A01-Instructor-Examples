@@ -25,7 +25,7 @@ export default function AuthProvider({ children }) {
   // our original state will be for the accesstoken and the user.
   // they will use the stored items from localstorage as the default
   const [user, setUser] = useState(() => getStoredUser())
-  const [accessToken, setAccessToken] = useState(() => getAccessToken())
+  const [accessToken, setAccessTokenState] = useState(() => getAccessToken())
 
   // on logout and for cleanup we want to clear everything
   function clearAuthState() {
@@ -62,6 +62,8 @@ export default function AuthProvider({ children }) {
     onSuccess: ({tokens, me}) => {
       setUser(me)
       setAccessTokenState(tokens.access)
+      setRefreshToken(tokens.refresh)
+      setStoredUser(me)
     }
   })
 

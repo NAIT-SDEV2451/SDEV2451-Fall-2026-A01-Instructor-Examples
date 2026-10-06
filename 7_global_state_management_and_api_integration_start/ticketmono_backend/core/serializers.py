@@ -1,6 +1,7 @@
 # let's create the user register serializer
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+
 # we're going to import the hashing for the password.
 from django.contrib.auth.hashers import make_password
 
@@ -28,6 +29,10 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "email": {"required": True},
             "role": {"required": False},  # the default is just user
         }
+
+    # let's add a validator that will return the hashed password
+    def validate_password(self, value):
+        return make_password(value)
 
     def create(self, validated_data):
         # we could also send a welcome email here

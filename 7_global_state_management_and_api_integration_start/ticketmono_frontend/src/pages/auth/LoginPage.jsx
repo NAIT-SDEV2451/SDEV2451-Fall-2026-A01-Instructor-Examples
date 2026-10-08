@@ -30,7 +30,7 @@ function LoginPage() {
           <h2 className="card-title text-2xl mb-2">Log In</h2>
           { loginError &&
             <div className="alert alert-error">
-              {loginError}
+              {loginError.toString()}
             </div>
           }
 

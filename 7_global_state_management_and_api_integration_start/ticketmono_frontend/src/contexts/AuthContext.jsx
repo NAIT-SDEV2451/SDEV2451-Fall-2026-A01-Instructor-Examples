@@ -4,7 +4,7 @@ import {
   loginUser,
   registerUser,
   refresh,
-  me,
+  me as fetchMe,
 } from '../api/auth'
 import { setAuthCallbacks } from '../api/client'
 import {
@@ -50,7 +50,7 @@ export default function AuthProvider({ children }) {
       setAccessToken(tokens.access)
 
       // 4. let's get the user profile
-      const meResponse = await me()
+      const meResponse = await fetchMe()
       if (!meResponse.ok) {
         throw new Error("user profile fetch failed")
       }

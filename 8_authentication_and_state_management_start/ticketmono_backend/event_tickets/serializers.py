@@ -28,10 +28,17 @@ class OrganizerSerializer(ModelSerializer):
 
 class EventListReadOnlySerializer(ModelSerializer):
     # show the nested representation of the foreign key fields
-    venue = VenueSerializer(read_only=True)
-    organizer = OrganizerSerializer(read_only=True)
+    venue = VenueSerializer(
+        read_only=True,
+    )
+    organizer = OrganizerSerializer(
+        read_only=True,
+    )
     # note: for ticket tiers you need to specify many=True
-    ticket_tiers = TicketTierSerializer(many=True, read_only=True)
+    ticket_tiers = TicketTierSerializer(
+        many=True,
+        read_only=True,
+    )
 
     class Meta:
         model = Event

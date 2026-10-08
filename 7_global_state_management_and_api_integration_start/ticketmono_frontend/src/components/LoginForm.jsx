@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-function LoginForm({ onSubmit }) {
+// let's add the loading so that we can disable the
+// button.
+function LoginForm({ onSubmit, isLoading = false }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -37,8 +39,16 @@ function LoginForm({ onSubmit }) {
           required
         />
       </div>
-      <button type="submit" className="btn btn-primary w-full mt-2">
-        Log In
+      <button
+        type="submit"
+        className="btn btn-primary w-full mt-2"
+        disabled={isLoading}
+      >
+        {
+          isLoading ?
+          <span className="loading loading-spinner loading-sm" />
+          : "Log In"
+        }
       </button>
     </form>
   )

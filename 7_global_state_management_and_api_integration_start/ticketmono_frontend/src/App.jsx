@@ -8,6 +8,8 @@ import EventDetailPage from './pages/attendee/EventDetailPage'
 import SelectTicketsPage from './pages/attendee/SelectTicketsPage'
 import CheckoutPage from './pages/attendee/CheckoutPage'
 import AuthProvider from './contexts/AuthContext'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import Navbar from './components/Navbar'
 
 const queryClient = new QueryClient()
 
@@ -18,24 +20,40 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <div className="min-h-screen bg-base-200">
-            <nav className="navbar bg-base-100 shadow px-6">
-              <div className="flex-1">
-                <span className="text-xl font-bold">Ticketmono</span>
-              </div>
-              <div className="flex gap-4">
-                <NavLink to="/" className="btn btn-ghost btn-sm">Events</NavLink>
-                <NavLink to="/login" className="btn btn-ghost btn-sm">Login</NavLink>
-                <NavLink to="/register" className="btn btn-primary btn-sm">Register</NavLink>
-              </div>
-            </nav>
+            <Navbar />
             <main className="p-6 max-w-5xl mx-auto">
               <Routes>
-                <Route path="/" element={<EventsListPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/events/:id" element={<EventDetailPage />} />
-                <Route path="/events/:id/tickets" element={<SelectTicketsPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route
+                  path="/"
+                  element={<EventsListPage />}
+                />
+                <Route path="/login"
+                  element={<LoginPage />}
+                />
+                <Route
+                  path="/register"
+                  element={<RegisterPage />}
+                />
+                <Route
+                  path="/events/:id"
+                  element={<EventDetailPage />}
+                />
+                <Route
+                  path="/events/:id/tickets"
+                  element={
+                    <ProtectedRoute>
+                      <SelectTicketsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <ProtectedRoute>
+                      <CheckoutPage />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </main>
           </div>

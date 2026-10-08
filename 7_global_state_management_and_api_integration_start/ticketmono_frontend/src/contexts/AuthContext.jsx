@@ -80,8 +80,6 @@ export default function AuthProvider({ children }) {
     }
   })
 
-
-
   // logout wierdly enough is not a mutation, it's just clearing the AuthState
   function logout() {
     clearAuthState()

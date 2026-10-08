@@ -46,7 +46,9 @@ function LoginForm({ onSubmit, isLoading = false }) {
       >
         {
           isLoading ?
-          <span className="loading loading-spinner loading-sm" />
+          <span
+            className="loading loading-spinner loading-sm"
+          />
           : "Log In"
         }
       </button>

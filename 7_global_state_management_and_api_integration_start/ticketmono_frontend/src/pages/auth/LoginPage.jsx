@@ -1,8 +1,25 @@
+import { useNavigate } from "react-router-dom"
 import LoginForm from "../../components/LoginForm"
+import { useAuth } from "../../hooks/useAuth"
+
 
 function LoginPage() {
+  const {
+    login,
+    isLoggingIn,
+    loginError
+  } = useAuth()
+  const navigate = useNavigate()
+
   const submit = (formData) => {
     console.log("login submitted", formData)
+    // remember here that login is a
+    // react query mutation
+    login(formData, {
+      onSuccess: () => {
+        navigate('/')
+      }
+    })
   }
 
 

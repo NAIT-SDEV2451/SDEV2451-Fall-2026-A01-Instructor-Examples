@@ -39,27 +39,28 @@ export default function AuthProvider({ children }) {
   // login mutation
   const loginMutation = useMutation({
     mutationFn: async (credentials) => {
-      // perform the api call.
+      // 1. perform the api call.
       const response = await loginUser(credentials)
       if (!response.ok) {
         throw new Error("login failed")
       }
-      // get the tokens from the response.
+      // 2. get the tokens from the response.
       const tokens = await response.json()
-      // set the access token on localStorage
+      // 3. set the access token on localStorage
       setAccessToken(tokens.access)
 
-      // let's get the user profile
+      // 4. let's get the user profile
       const meResponse = await me()
       if (!meResponse.ok) {
         throw new Error("user profile fetch failed")
       }
       const me = await meResponse.json()
 
-      // return both tokens and the user
+      // 5. return both tokens and the user
       return { tokens, me }
     },
     onSuccess: ({tokens, me}) => {
+      // 6. setting everything.
       setUser(me)
       setAccessTokenState(tokens.access)
       setRefreshToken(tokens.refresh)

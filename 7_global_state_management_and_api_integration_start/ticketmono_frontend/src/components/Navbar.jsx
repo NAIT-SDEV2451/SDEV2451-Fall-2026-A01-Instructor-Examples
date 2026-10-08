@@ -23,7 +23,7 @@ export default function Navbar() {
       {user ?
         <>
           {/* if the user is logged in I want to show the name, and logout button */}
-          <span className="text-sm text-base-content/60">
+          <span className="text-sm text-base-content/60 mt-2">
             Hi {user.username}
           </span>
           <button className="btn btn-ghost btn-sm"

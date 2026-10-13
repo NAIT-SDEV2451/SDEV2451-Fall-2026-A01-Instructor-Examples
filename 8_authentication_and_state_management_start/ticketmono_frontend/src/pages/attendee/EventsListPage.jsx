@@ -12,7 +12,7 @@ function EventsListPage() {
 
   // if you're ever confused on what it's returning just
   // console.log it!
-  console.log(events)
+  // console.log(events)
   // console.log(isLoading)
   // console.log(isError)
 

@@ -16,11 +16,13 @@ function EventsListPage() {
     </div>
   }
 
-  if (isError){
-
+  if (isError) {
+    return <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="alert alert-error">
+        <span>Failed to load events. Please try again later.</span>
+      </div>
+    </div>
   }
-
-
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

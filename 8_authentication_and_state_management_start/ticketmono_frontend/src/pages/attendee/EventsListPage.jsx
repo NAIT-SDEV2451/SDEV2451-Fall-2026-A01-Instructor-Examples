@@ -1,8 +1,27 @@
 // let's use our event card here.
 
 import EventCard from "../../components/EventCard"
+import { useEvents } from "../../hooks/useEvents"
 
 function EventsListPage() {
+  const {
+    data,
+    isLoading,
+    isError
+  } = useEvents()
+
+  if (isLoading) {
+    return <div className="flex justify-center mt-12">
+      <span className="loading loading-spinner loading-lg"></span>
+    </div>
+  }
+
+  if (isError){
+
+  }
+
+
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Upcoming Events</h1>

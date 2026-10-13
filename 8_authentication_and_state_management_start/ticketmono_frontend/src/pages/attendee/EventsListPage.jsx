@@ -5,10 +5,16 @@ import { useEvents } from "../../hooks/useEvents"
 
 function EventsListPage() {
   const {
-    data,
+    data: events,
     isLoading,
     isError
   } = useEvents()
+
+  // if you're ever confused on what it's returning just
+  // console.log it!
+  console.log(events)
+  // console.log(isLoading)
+  // console.log(isError)
 
   if (isLoading) {
     return <div className="flex justify-center mt-12">
@@ -28,16 +34,10 @@ function EventsListPage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Upcoming Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-
+        {/* loop through the events and display them */}
+        {events.map((event) => {
+          return <EventCard key={event.id} event={event} />
+        })}
       </div>
     </div>
   )

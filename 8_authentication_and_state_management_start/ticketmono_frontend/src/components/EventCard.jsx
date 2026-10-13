@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 // this will be the card for a single event.
 // take a look at the docs here! https://daisyui.com/components/card/?lang=en
 export default function EventCard({ event }) {
@@ -23,9 +25,16 @@ export default function EventCard({ event }) {
       </p>
       <p className="text-sm">{event.venue.name}</p>
       <p className="text-sm text-base-content/60">
-        {event.venue.address}</p>
+        {event.venue.address}
+      </p>
       <div className="card-actions justify-end mt-2">
-
+        {/* we're going to be getting the specific event by the id. */}
+        <Link
+          to={`/events/${event.id}`}
+          className="btn btn-primary btn-sm"
+        >
+          Get Tickets
+        </Link>
         {/*
         We change this to a link that we can navigate to.
         <button className="btn btn-primary btn-sm">

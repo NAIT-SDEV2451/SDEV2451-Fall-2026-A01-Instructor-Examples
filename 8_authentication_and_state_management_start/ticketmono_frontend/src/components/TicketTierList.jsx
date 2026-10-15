@@ -1,7 +1,5 @@
 import TicketTierSelector from './TicketTierSelector'
 
-import TicketTierSelector from './TicketTierSelector'
-
 export default function TicketTierList({tiers}) {
   return <div>
     <h2 className="text-xl font-bold mb-3">

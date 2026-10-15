@@ -10,6 +10,8 @@ export default function TicketTierList({tiers, eventId, eventName }) {
         return <TicketTierSelector
           key={tier.id}
           tier={tier}
+          eventId={eventId}
+          eventName={eventName}
         />
       })}
     </div>

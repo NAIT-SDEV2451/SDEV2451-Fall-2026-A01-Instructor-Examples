@@ -10,11 +10,11 @@ export default function TicketTierSelector(
       // we use the old value and remove one.
       // we set it to the maxmimum between the val above
       // and zero so it's never negative.
-      (q) => Math.max(0, q-1)
+      (q) => Math.max(0, q - 1)
     )
   }
 
-  const increment = ()=> {
+  const increment = () => {
     // we're assuming infinite tickets, but we'd
     // have to check this on the venue and event as well.
     setQuantity(quantity + 1)
@@ -32,13 +32,16 @@ export default function TicketTierSelector(
       </p>
     </div>
     <div className="flex items-center gap-3">
-      <button className="btn btn-sm btn-outline"
+      <button
+        className="btn btn-sm btn-outline"
         onClick={decrement}
       >-</button>
-      <span className="w-6 text-center font-medium">
+      <span
+        className="w-6 text-center font-medium">
         {quantity}
       </span>
-      <button className="btn btn-sm btn-outline"
+      <button
+        className="btn btn-sm btn-outline"
         onClick={increment}
       >+</button>
     </div>

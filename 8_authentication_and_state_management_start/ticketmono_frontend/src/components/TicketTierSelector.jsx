@@ -5,19 +5,27 @@ import { useCart } from "../hooks/useCart"
 export default function TicketTierSelector(
   { tier, eventId, eventName }
 ) {
-  const [quantity, setQuantity] = useState(0)
+  // const [quantity, setQuantity] = useState(0)
   // we're going to update the cart here.
-  const { updateCart } = useCart()
+  const { items, updateCart } = useCart()
   // there's a bug here can you spot it?
-
-
+  // the bug is that if we go back to this page it'll
+  // set the state to zero.
+  // this just uses the global store.
+  let quantity = 0;
+  let key = `${eventId}-${tier.id}`
+  console.log(items[key])
+  let globalStoredItem = items[key]
+  if (globalStoredItem) {
+    quantity = globalStoredItem.quantity
+  }
 
   const decrement = () => {
     // we use the old value and remove one.
     // we set it to the maxmimum between the val above
     // and zero so it's never negative.
     const newQuantity = Math.max(0, quantity - 1)
-    setQuantity(newQuantity)
+    // setQuantity(newQuantity)
     // we're going to update the overall cart
     updateCart({
       eventId,
@@ -34,7 +42,7 @@ export default function TicketTierSelector(
     // we're assuming infinite tickets, but we'd
     // have to check this on the venue and event as well.
     const newQuantity = quantity + 1
-    setQuantity(newQuantity)
+    // setQuantity(newQuantity)
     updateCart({
       eventId,
       eventName,

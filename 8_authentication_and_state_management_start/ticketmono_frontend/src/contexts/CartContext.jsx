@@ -14,6 +14,9 @@ export default function CartProvider({children}) {
   function updateCart({
     eventId, eventName, tierId, tierName, tierPrice, quantity
   }) {
+    // since this cart is only on the frontend
+    // we could store this as local storage!
+    // so that you could come back to the cart.
     const key = `${eventId}-${tierId}`
     updateCartItems((prev) => {
       // let's remove the key if there's zero.

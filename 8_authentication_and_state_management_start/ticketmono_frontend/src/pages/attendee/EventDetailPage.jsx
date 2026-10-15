@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 
 import EventDetailsHeader from '../../components/EventDetailsHeader'
+import TicketTierList from '../../components/TicketTierList'
 
 const STATIC_TIERS = [
   {
@@ -26,6 +27,7 @@ function EventDetailPage() {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <EventDetailsHeader />
+      <TicketTierList tiers={STATIC_TIERS} />
     </div>
   )
 }

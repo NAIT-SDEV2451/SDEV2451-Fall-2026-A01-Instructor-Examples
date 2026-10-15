@@ -32,11 +32,15 @@ export default function TicketTierSelector(
       </p>
     </div>
     <div className="flex items-center gap-3">
-      <button className="btn btn-sm btn-outline">-</button>
+      <button className="btn btn-sm btn-outline"
+        onClick={decrement}
+      >-</button>
       <span className="w-6 text-center font-medium">
         {quantity}
       </span>
-      <button className="btn btn-sm btn-outline">+</button>
+      <button className="btn btn-sm btn-outline"
+        onClick={increment}
+      >+</button>
     </div>
   </div>
 }

@@ -11,7 +11,7 @@ export async function fetchEvents() {
 // note we could make this a single func in the
 // future but we're not right now.
 export async function fetchEvent(id) {
-  const response = await apiClient(`/events/${id}`)
+  const response = await apiClient(`/events/${id}/`)
   if (!response.ok) {
     throw new Error("Failed to fetch events")
   }

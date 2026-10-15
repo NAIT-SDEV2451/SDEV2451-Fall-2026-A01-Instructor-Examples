@@ -21,7 +21,7 @@ export default function TicketTierSelector(
       eventName,
       tierId: tier.id,
       tierName: tier.name,
-      tierPrice: tier.name,
+      tierPrice: tier.price,
       quantity: newQuantity
     })
 
@@ -37,7 +37,7 @@ export default function TicketTierSelector(
       eventName,
       tierId: tier.id,
       tierName: tier.name,
-      tierPrice: tier.name,
+      tierPrice: tier.price,
       quantity: newQuantity
     })
   }

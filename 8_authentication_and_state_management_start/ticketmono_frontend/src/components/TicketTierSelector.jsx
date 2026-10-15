@@ -1,6 +1,26 @@
+import { useState } from "react"
+
 export default function TicketTierSelector(
   { tier }
 ) {
+  const [quantity, setQuantity] = useState(0)
+
+  const decrement = () => {
+    setQuantity(
+      // we use the old value and remove one.
+      // we set it to the maxmimum between the val above
+      // and zero so it's never negative.
+      (q) => Math.max(0, q-1)
+    )
+  }
+
+  const increment = ()=> {
+    // we're assuming infinite tickets, but we'd
+    // have to check this on the venue and event as well.
+  }
+
+
+
   return <div className="flex items-center justify-between p-4 bg-base-100 rounded-box shadow">
     <div>
       <p className="font-semibold">
@@ -12,7 +32,9 @@ export default function TicketTierSelector(
     </div>
     <div className="flex items-center gap-3">
       <button className="btn btn-sm btn-outline">-</button>
-      <span className="w-6 text-center font-medium">0</span>
+      <span className="w-6 text-center font-medium">
+        {quantity}
+      </span>
       <button className="btn btn-sm btn-outline">+</button>
     </div>
   </div>

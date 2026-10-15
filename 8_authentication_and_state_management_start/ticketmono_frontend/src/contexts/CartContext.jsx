@@ -16,7 +16,25 @@ export default function CartProvider({children}) {
   }) {
     const key = `${eventId}-${tierId}`
     updateCartItems((prev) => {
-      return {...prev, [key]: {quantity}}
+      // let's remove the key if there's zero.
+      if (quantity === 0) {
+        // use destructuring.
+        const {[key]: _, ...rest} = prev
+        return rest
+      }
+      // this is the magic that updates the state
+
+      return {
+        ...prev, // all existing vals.
+        [key]: { // our key mentioned above.
+          // all the values
+          quantity,
+          eventName,
+          tierId,
+          tierName,
+          tierPrice,
+        }
+      }
     })
   }
   // what we're going to expose to the cart provider

@@ -8,6 +8,9 @@ export default function TicketTierSelector(
   const [quantity, setQuantity] = useState(0)
   // we're going to update the cart here.
   const { updateCart } = useCart()
+  // there's a bug here can you spot it?
+
+
 
   const decrement = () => {
     // we use the old value and remove one.

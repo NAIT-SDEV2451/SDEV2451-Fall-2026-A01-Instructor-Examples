@@ -23,16 +23,26 @@ export default function CartProvider({children}) {
         return rest
       }
       // this is the magic that updates the state
-
+      console.log({
+        ...prev, // all existing vals.
+        [key]: { // our key mentioned above.
+          // all the values
+          quantity: quantity,
+          eventName: eventName,
+          tierId: tierId,
+          tierName: tierName,
+          tierPrice: tierPrice,
+        }
+      })
       return {
         ...prev, // all existing vals.
         [key]: { // our key mentioned above.
           // all the values
-          quantity,
-          eventName,
-          tierId,
-          tierName,
-          tierPrice,
+          quantity: quantity,
+          eventName: eventName,
+          tierId: tierId,
+          tierName: tierName,
+          tierPrice: tierPrice,
         }
       }
     })

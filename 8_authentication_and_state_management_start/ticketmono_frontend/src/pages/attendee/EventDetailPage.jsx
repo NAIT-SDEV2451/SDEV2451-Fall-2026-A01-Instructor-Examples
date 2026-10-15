@@ -1,28 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 import EventDetailsHeader from '../../components/EventDetailsHeader'
 import TicketTierList from '../../components/TicketTierList'
 
 import { useEvent } from '../../hooks/useEvent'
 
-const STATIC_TIERS = [
-  {
-    "id": 1,
-    "price": "150.00",
-    "name": "Floor"
-  },
-  {
-    "id": 2,
-    "price": "85.00",
-    "name": "Lower Bowl"
-  },
-  {
-    "id": 3,
-    "price": "45.00",
-    "name": "Upper Bowl"
-  }
-]
-
+import { useCart } from '../../hooks/useCart'
 
 function EventDetailPage() {
   const { id } = useParams()
@@ -35,6 +18,11 @@ function EventDetailPage() {
   } = useEvent(id)
   // to update event details header with the
   // information from the hook
+
+  // let's get the cart items
+  const { items } = useCart()
+  // if there are items let's checkout
+  const hasItems = Object.keys(items).length > 0
 
   // pass the ticket tiers in
   // handle error and loading states.
@@ -54,12 +42,21 @@ function EventDetailPage() {
 
   return (
     <div className="max-w-2xl mx-auto py-8">
-      <EventDetailsHeader event={event}/>
+      <EventDetailsHeader event={event} />
       <TicketTierList
         tiers={event.ticket_tiers}
         eventId={event.id}
         eventName={event.name}
       />
+      {/* if it has items then we can checkout */}
+      {hasItems && (
+        <div className="mt-6">
+          <Link to="/checkout"
+            className="btn btn-primary w-full">
+            Go to Checkout
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

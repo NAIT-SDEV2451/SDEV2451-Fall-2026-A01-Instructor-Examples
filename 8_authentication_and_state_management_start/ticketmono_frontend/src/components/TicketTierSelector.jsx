@@ -17,6 +17,7 @@ export default function TicketTierSelector(
   const increment = ()=> {
     // we're assuming infinite tickets, but we'd
     // have to check this on the venue and event as well.
+    setQuantity(quantity + 1)
   }
 
 

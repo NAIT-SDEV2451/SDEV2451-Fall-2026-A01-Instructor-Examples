@@ -1,6 +1,6 @@
 import TicketTierSelector from './TicketTierSelector'
 
-export default function TicketTierList({tiers}) {
+export default function TicketTierList({tiers, eventId, eventName }) {
   return <div>
     <h2 className="text-xl font-bold mb-3">
       Ticket Tiers

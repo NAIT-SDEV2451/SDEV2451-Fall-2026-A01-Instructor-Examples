@@ -19,6 +19,8 @@ class EventViewSet(ModelViewSet):
     # permission_classes = [AllowAny]
     # we have different permissions for listing events and get events
 
+    # you can use this pattern for differen actions having
+    # different permissions
     def get_permissions(self):
         # all viewsets have the following actions: list, create, retrieve, update, partial_update, destroy.
         # https://www.django-rest-framework.org/api-guide/viewsets/#viewset-actions

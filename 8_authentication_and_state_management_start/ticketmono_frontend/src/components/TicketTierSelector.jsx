@@ -1,9 +1,13 @@
 import { useState } from "react"
+import { useCart } from "../hooks/useCart"
+
 
 export default function TicketTierSelector(
   { tier, eventId, eventName }
 ) {
   const [quantity, setQuantity] = useState(0)
+  // we're going to update the cart here.
+  const { updateCart } = useCart()
 
   const decrement = () => {
     // we use the old value and remove one.
@@ -11,6 +15,15 @@ export default function TicketTierSelector(
     // and zero so it's never negative.
     const newQuantity = Math.max(0, quantity - 1)
     setQuantity(newQuantity)
+    // we're going to update the overall cart
+    updateCart({
+      eventId,
+      eventName,
+      tierId: tier.id,
+      tierName: tier.name,
+      tierPrice: tier.name,
+      quantity: newQuantity
+    })
 
   }
 
@@ -19,6 +32,14 @@ export default function TicketTierSelector(
     // have to check this on the venue and event as well.
     const newQuantity = quantity + 1
     setQuantity(newQuantity)
+    updateCart({
+      eventId,
+      eventName,
+      tierId: tier.id,
+      tierName: tier.name,
+      tierPrice: tier.name,
+      quantity: newQuantity
+    })
   }
 
   return <div className="flex items-center justify-between p-4 bg-base-100 rounded-box shadow">

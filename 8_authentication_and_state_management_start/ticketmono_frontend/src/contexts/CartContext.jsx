@@ -14,7 +14,10 @@ export default function CartProvider({children}) {
   function updateCart({
     eventId, eventName, tierId, tierName, tierPrice, quantity
   }) {
-
+    const key = `${eventId}-${tierId}`
+    updateCartItems((prev) => {
+      return {...prev, [key]: {quantity}}
+    })
   }
   // what we're going to expose to the cart provider
   const value = {

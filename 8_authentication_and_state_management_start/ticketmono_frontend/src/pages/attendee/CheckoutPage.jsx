@@ -31,20 +31,20 @@ function CheckoutPage() {
             className="flex justify-between py-3 border-b border-base-300"
           >
             <div>
-              <p className="font-semibold">EVENTNAME</p>
+              <p className="font-semibold">{item.eventName}</p>
               <p className="text-sm text-base-content/60">
-                TIERNAME x QUANTITY
+                {item.tierName} x {item.quantity}
               </p>
             </div>
             <p className="font-medium">
-              ITEM PRICE
+              ${((item.quantity)*parseFloat(item.tierPrice)).toFixed(2)}
             </p>
           </div>
         })}
 
         <div className="flex justify-between pt-4 font-bold text-lg">
           <span>Total</span>
-          <span>$TOTAL PRICE</span>
+          <span>${grandTotal.toFixed(2)}</span>
         </div>
       </div>
 

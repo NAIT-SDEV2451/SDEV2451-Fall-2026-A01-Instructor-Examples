@@ -12,10 +12,9 @@ export default function TicketTierSelector(
   // the bug is that if we go back to this page it'll
   // set the state to zero.
   // this just uses the global store.
-  let quantity = 0;
   let key = `${eventId}-${tier.id}`
-  console.log(items[key])
   let globalStoredItem = items[key]
+  let quantity = 0;
   if (globalStoredItem) {
     quantity = globalStoredItem.quantity
   }

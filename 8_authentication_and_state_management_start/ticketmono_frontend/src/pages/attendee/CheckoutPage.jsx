@@ -5,8 +5,20 @@ function CheckoutPage() {
   // let's convert the cart items to a list.
   const cartItems = Object.values(items)
 
-  console.log("cartItems", cartItems)
+  const grandTotal = cartItems.reduce(
+    (sum, item) => {
+      return sum + (item.quantity * parseFloat(item.tierPrice))
+    },
+    0 // the original value of sum
+  )
 
+  // let's handle the case that the cart is empty.
+  if (cartItems.length === 0) {
+    return <div className="max-w-2xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+      <p className="text-base-content/60">Your cart is empty.</p>
+    </div>
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">

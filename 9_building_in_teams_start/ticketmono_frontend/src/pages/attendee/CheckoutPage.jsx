@@ -2,7 +2,7 @@ import { useCart } from '../../hooks/useCart'
 import { useCreateOrder } from '../../hooks/useCreateOrder'
 
 function CheckoutPage() {
-  const { items } = useCart()
+  const { items, clearCart } = useCart()
 
   const { mutate, isPending, isSuccess } = useCreateOrder()
 
@@ -17,7 +17,13 @@ function CheckoutPage() {
       }
     })
     // let's post to the backend with our mutation
-    mutate(orderItems)
+    mutate(orderItems, {
+      // we could also move this into the useCreateOrder hook as well.
+      onSuccess: () => {
+        // clear cart
+        clearCart()
+      }
+    })
   }
 
   const cartItems = Object.values(items)

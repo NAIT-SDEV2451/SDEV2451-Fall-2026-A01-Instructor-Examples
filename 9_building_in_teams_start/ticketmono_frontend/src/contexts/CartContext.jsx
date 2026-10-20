@@ -16,9 +16,14 @@ export function CartProvider({ children }) {
     })
   }
 
+  function clearCart() {
+    updateCartItems({})
+  }
+
   const value = {
     items,
     updateCart,
+    clearCart
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

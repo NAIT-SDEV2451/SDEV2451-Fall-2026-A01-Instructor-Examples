@@ -1,12 +1,38 @@
 import { useCart } from '../../hooks/useCart'
+import { useCreateOrder } from '../../hooks/useCreateOrder'
 
 function CheckoutPage() {
   const { items } = useCart()
+
+  const { mutate, isPending, isSuccess } = useCreateOrder()
+
+  // let's create the funciton that will handle the order placement
+  const handlePlaceOrder = () => {
+    // building the body
+    const orderItems = cartItems.map((item)=> {
+      return {
+        event_id: item.eventId,
+        ticket_tier_id: item.tierId,
+        quantity: item.quantity,
+      }
+    })
+    // let's post to the backend with our mutation
+    mutate(orderItems)
+  }
+
   const cartItems = Object.values(items)
   const grandTotal = cartItems.reduce(
     (sum, item) => sum + item.quantity * parseFloat(item.tierPrice),
     0
   )
+
+  // let's display something on success
+  if (isSuccess) {
+    return <div className="max-w-2xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">Checkout</h1>
+      <p className="text-base-content/60">Thank you for your order</p>
+    </div>
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -36,7 +62,11 @@ function CheckoutPage() {
             <span>${grandTotal.toFixed(2)}</span>
           </div>
           <div className="mt-6">
-            <button className="btn btn-primary w-full">
+            <button
+              onClick={handlePlaceOrder}
+              disabled={isPending}
+              className="btn btn-primary w-full"
+            >
               Place Order
             </button>
           </div>

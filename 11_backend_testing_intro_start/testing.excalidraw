@@ -1,0 +1,1302 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "_J6qT_dFSHs6IoepKQr8V",
+      "type": "rectangle",
+      "x": 861,
+      "y": 172,
+      "width": 465,
+      "height": 582.0000000000001,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a0",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 168904806,
+      "version": 145,
+      "versionNonce": 1334226170,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115363551,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "FNDchrL4Vq1nnihJpBP5Z",
+      "type": "rectangle",
+      "x": 265.5,
+      "y": 166.5,
+      "width": 465,
+      "height": 754,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a1",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1948879354,
+      "version": 173,
+      "versionNonce": 1675030010,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793115686788,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "nRaa2IxrM3M72QDykBMlk",
+      "type": "text",
+      "x": 1043,
+      "y": 134,
+      "width": 80.83992004394531,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a2",
+      "roundness": null,
+      "seed": 1777397242,
+      "version": 39,
+      "versionNonce": 1171984486,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115079877,
+      "link": null,
+      "locked": false,
+      "text": "Backend",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Backend",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "CbtYkMO8VrWL7joKCYyTN",
+      "type": "text",
+      "x": 425.58003997802734,
+      "y": 136.5,
+      "width": 88.39993286132812,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a3",
+      "roundness": null,
+      "seed": 1804328122,
+      "version": 100,
+      "versionNonce": 110957050,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793115075280,
+      "link": null,
+      "locked": false,
+      "text": "Frontend",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Frontend",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "hRPrF5VNU8Bxo4qOnpdqv",
+      "type": "rectangle",
+      "x": 294,
+      "y": 191,
+      "width": 401,
+      "height": 144,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a4",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1542108134,
+      "version": 68,
+      "versionNonce": 183542438,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115075280,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "hfJ36ii4_ZgI7yyTPRGzo",
+      "type": "rectangle",
+      "x": 902.5,
+      "y": 196,
+      "width": 401,
+      "height": 144,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a5",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 766647718,
+      "version": 116,
+      "versionNonce": 1701384442,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793115079877,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "kKXLYW3-rqkRf_cdPVFBf",
+      "type": "text",
+      "x": 927,
+      "y": 219,
+      "width": 223.33984375,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a6",
+      "roundness": null,
+      "seed": 263281594,
+      "version": 25,
+      "versionNonce": 1311249318,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115079877,
+      "link": null,
+      "locked": false,
+      "text": "The backend app code.",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "The backend app code.",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "0XuBuZ17xjvfrpmWyDSSA",
+      "type": "text",
+      "x": 334.330078125,
+      "y": 210.5,
+      "width": 231.73985290527344,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a7",
+      "roundness": null,
+      "seed": 793674086,
+      "version": 88,
+      "versionNonce": 1406976698,
+      "isDeleted": false,
+      "boundElements": [],
+      "updated": 1793115075280,
+      "link": null,
+      "locked": false,
+      "text": "The frontend app code.",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "The frontend app code.",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "rl7P8rfk93-GV3-fs-9hd",
+      "type": "freedraw",
+      "x": 959,
+      "y": 348,
+      "width": 23,
+      "height": 91,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a9",
+      "roundness": null,
+      "seed": 783953210,
+      "version": 24,
+      "versionNonce": 865429050,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115099992,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          9
+        ],
+        [
+          -5,
+          19
+        ],
+        [
+          -13,
+          41
+        ],
+        [
+          -15,
+          49
+        ],
+        [
+          -16,
+          52
+        ],
+        [
+          -16,
+          54
+        ],
+        [
+          -17,
+          57
+        ],
+        [
+          -17,
+          60
+        ],
+        [
+          -17,
+          64
+        ],
+        [
+          -18,
+          69
+        ],
+        [
+          -20,
+          74
+        ],
+        [
+          -21,
+          78
+        ],
+        [
+          -21,
+          79
+        ],
+        [
+          -21,
+          80
+        ],
+        [
+          -21,
+          81
+        ],
+        [
+          -21,
+          86
+        ],
+        [
+          -21,
+          88
+        ],
+        [
+          -22,
+          89
+        ],
+        [
+          -22,
+          90
+        ],
+        [
+          -23,
+          91
+        ],
+        [
+          -23,
+          91
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        -23,
+        91
+      ]
+    },
+    {
+      "id": "SZzM4mtxxATKxcLD9E3NR",
+      "type": "freedraw",
+      "x": 945,
+      "y": 351,
+      "width": 29,
+      "height": 34,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aA",
+      "roundness": null,
+      "seed": 1578071462,
+      "version": 24,
+      "versionNonce": 382921894,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115101050,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          4,
+          -3
+        ],
+        [
+          8,
+          -8
+        ],
+        [
+          11,
+          -10
+        ],
+        [
+          12,
+          -11
+        ],
+        [
+          13,
+          -11
+        ],
+        [
+          16,
+          -11
+        ],
+        [
+          22,
+          -11
+        ],
+        [
+          23,
+          -11
+        ],
+        [
+          24,
+          -12
+        ],
+        [
+          24,
+          -7
+        ],
+        [
+          24,
+          -5
+        ],
+        [
+          24,
+          -3
+        ],
+        [
+          25,
+          -2
+        ],
+        [
+          25,
+          -1
+        ],
+        [
+          25,
+          1
+        ],
+        [
+          26,
+          6
+        ],
+        [
+          27,
+          13
+        ],
+        [
+          28,
+          17
+        ],
+        [
+          28,
+          21
+        ],
+        [
+          28,
+          22
+        ],
+        [
+          29,
+          22
+        ],
+        [
+          29,
+          22
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        29,
+        22
+      ]
+    },
+    {
+      "id": "5Kwn2728o7MaCiYQlJyNy",
+      "type": "rectangle",
+      "x": 875,
+      "y": 443,
+      "width": 441,
+      "height": 152,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aB",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 852291962,
+      "version": 79,
+      "versionNonce": 2038070886,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115169510,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "8DQjRQ6sueHDk1TihWDGf",
+      "type": "text",
+      "x": 908,
+      "y": 457,
+      "width": 372.479736328125,
+      "height": 125,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aC",
+      "roundness": null,
+      "seed": 48813222,
+      "version": 170,
+      "versionNonce": 653010554,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115163494,
+      "link": null,
+      "locked": false,
+      "text": "Backend Unit tests\n- testing a single function/method or \nclass in isolation\n- most testing frameworks look very\nsimiliar.",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Backend Unit tests\n- testing a single function/method or \nclass in isolation\n- most testing frameworks look very\nsimiliar.",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "tbyNIyfJpmC8hj_3o2sP_",
+      "type": "rectangle",
+      "x": 879,
+      "y": 604,
+      "width": 433,
+      "height": 137,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aD",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1490942438,
+      "version": 66,
+      "versionNonce": 198221222,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115212854,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "3odNdRtWZA13bbfuF2CtW",
+      "type": "text",
+      "x": 904.0348635253906,
+      "y": 615,
+      "width": 349.409912109375,
+      "height": 110.99999999999997,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aE",
+      "roundness": null,
+      "seed": 97905702,
+      "version": 244,
+      "versionNonce": 1438096934,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115621863,
+      "link": null,
+      "locked": false,
+      "text": "Backend Integration Tests\n- using our a client that's going to make\nthe requests and handle the responses\n- this is similar to our postman testing\nby hand",
+      "fontSize": 17.759999999999998,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Backend Integration Tests\n- using our a client that's going to make\nthe requests and handle the responses\n- this is similar to our postman testing\nby hand",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "uI5yec8AOh-sgW46x8nC7",
+      "type": "freedraw",
+      "x": 1307,
+      "y": 616,
+      "width": 99,
+      "height": 264,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aF",
+      "roundness": null,
+      "seed": 1270540710,
+      "version": 44,
+      "versionNonce": 1258481958,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115277335,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          9,
+          -9
+        ],
+        [
+          18,
+          -20
+        ],
+        [
+          27,
+          -36
+        ],
+        [
+          30,
+          -43
+        ],
+        [
+          31,
+          -49
+        ],
+        [
+          33,
+          -54
+        ],
+        [
+          35,
+          -66
+        ],
+        [
+          37,
+          -71
+        ],
+        [
+          40,
+          -82
+        ],
+        [
+          42,
+          -95
+        ],
+        [
+          43,
+          -104
+        ],
+        [
+          43,
+          -119
+        ],
+        [
+          40,
+          -129
+        ],
+        [
+          37,
+          -139
+        ],
+        [
+          35,
+          -145
+        ],
+        [
+          32,
+          -152
+        ],
+        [
+          26,
+          -166
+        ],
+        [
+          21,
+          -176
+        ],
+        [
+          16,
+          -184
+        ],
+        [
+          10,
+          -193
+        ],
+        [
+          1,
+          -204
+        ],
+        [
+          -3,
+          -209
+        ],
+        [
+          -5,
+          -212
+        ],
+        [
+          -7,
+          -214
+        ],
+        [
+          -9,
+          -216
+        ],
+        [
+          -12,
+          -219
+        ],
+        [
+          -17,
+          -223
+        ],
+        [
+          -24,
+          -230
+        ],
+        [
+          -31,
+          -234
+        ],
+        [
+          -39,
+          -239
+        ],
+        [
+          -42,
+          -242
+        ],
+        [
+          -44,
+          -242
+        ],
+        [
+          -45,
+          -245
+        ],
+        [
+          -49,
+          -249
+        ],
+        [
+          -50,
+          -249
+        ],
+        [
+          -50,
+          -250
+        ],
+        [
+          -53,
+          -257
+        ],
+        [
+          -54,
+          -261
+        ],
+        [
+          -55,
+          -262
+        ],
+        [
+          -56,
+          -264
+        ],
+        [
+          -56,
+          -264
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        -56,
+        -264
+      ]
+    },
+    {
+      "id": "7rtNY1Vf-h2l6o_m0emgz",
+      "type": "freedraw",
+      "x": 1241,
+      "y": 367,
+      "width": 42,
+      "height": 19,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aG",
+      "roundness": null,
+      "seed": 1518046458,
+      "version": 16,
+      "versionNonce": 1187214074,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115278279,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          -5
+        ],
+        [
+          0,
+          -9
+        ],
+        [
+          0,
+          -15
+        ],
+        [
+          0,
+          -18
+        ],
+        [
+          1,
+          -19
+        ],
+        [
+          10,
+          -19
+        ],
+        [
+          18,
+          -19
+        ],
+        [
+          27,
+          -16
+        ],
+        [
+          30,
+          -15
+        ],
+        [
+          31,
+          -14
+        ],
+        [
+          36,
+          -14
+        ],
+        [
+          42,
+          -14
+        ],
+        [
+          42,
+          -14
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        42,
+        -14
+      ]
+    },
+    {
+      "id": "SIPeUYkySG59ajz5JOXRX",
+      "type": "freedraw",
+      "x": 973,
+      "y": 709,
+      "width": 0.0001,
+      "height": 0.0001,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aH",
+      "roundness": null,
+      "seed": 1210743930,
+      "version": 3,
+      "versionNonce": 1058679654,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115294377,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0001,
+          0.0001
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        0.0001,
+        0.0001
+      ]
+    },
+    {
+      "id": "TsGIuTcXFGe6sjGoF_jiS",
+      "type": "freedraw",
+      "x": 973,
+      "y": 709,
+      "width": 0.0001,
+      "height": 0.0001,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aI",
+      "roundness": null,
+      "seed": 1189546470,
+      "version": 3,
+      "versionNonce": 1475047482,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115294540,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0.0001,
+          0.0001
+        ]
+      ],
+      "pressures": [],
+      "simulatePressure": true,
+      "lastCommittedPoint": [
+        0.0001,
+        0.0001
+      ]
+    },
+    {
+      "id": "4nuCandPsfurDmrOX76lg",
+      "type": "text",
+      "x": 980,
+      "y": 380.5,
+      "width": 315.15966796875,
+      "height": 50.00422223685588,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aL",
+      "roundness": null,
+      "seed": 1013061798,
+      "version": 265,
+      "versionNonce": 802729018,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115358667,
+      "link": null,
+      "locked": false,
+      "text": "Backend testing is non negotiable and \nsuper important. This is because we're\nhandling the data, and we need that to be right",
+      "fontSize": 13.334459263161566,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Backend testing is non negotiable and \nsuper important. This is because we're\nhandling the data, and we need that to be right",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "MVRd-8fiGU110dYkknuGg",
+      "type": "rectangle",
+      "x": 277,
+      "y": 424,
+      "width": 442,
+      "height": 142,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aN",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 184100922,
+      "version": 75,
+      "versionNonce": 2087347302,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115599934,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "ExX_mN0nqetWBRZURqhpD",
+      "type": "text",
+      "x": 293,
+      "y": 439,
+      "width": 440.2396240234375,
+      "height": 120,
+      "angle": 0,
+      "strokeColor": "#846358",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aO",
+      "roundness": null,
+      "seed": 1514645754,
+      "version": 351,
+      "versionNonce": 657898106,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115593762,
+      "link": null,
+      "locked": false,
+      "text": "Frontend Unit Tests.\n- These are going to be difficult to set up because\nthere's so much tooling and external dependencies.\n- for example you need to call a backend, which is\nan external dependency, this adds complications because\nyou need to add a whole wack load of mocks",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Frontend Unit Tests.\n- These are going to be difficult to set up because\nthere's so much tooling and external dependencies.\n- for example you need to call a backend, which is\nan external dependency, this adds complications because\nyou need to add a whole wack load of mocks",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "_tDy8fOXfspa3onqMfh-Z",
+      "type": "rectangle",
+      "x": 272,
+      "y": 588,
+      "width": 445,
+      "height": 105,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aP",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1976414202,
+      "version": 82,
+      "versionNonce": 2135958694,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115665408,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "1sWevMqXWvYuhqKBgEuiP",
+      "type": "text",
+      "x": 294,
+      "y": 601,
+      "width": 418.60760498046875,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aQ",
+      "roundness": null,
+      "seed": 2112664742,
+      "version": 176,
+      "versionNonce": 871091558,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115661255,
+      "link": null,
+      "locked": false,
+      "text": "Frontend Integration Tests.\n- These are going to look a lot like end to end tests\nunless you have some functionality that is isolated in\nsome utility.",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "Frontend Integration Tests.\n- These are going to look a lot like end to end tests\nunless you have some functionality that is isolated in\nsome utility.",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "siqodyBQiSAeP6B6yBadj",
+      "type": "rectangle",
+      "x": 277,
+      "y": 706,
+      "width": 444,
+      "height": 205.00000000000003,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aR",
+      "roundness": {
+        "type": 3
+      },
+      "seed": 386202170,
+      "version": 70,
+      "versionNonce": 136049830,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115689704,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "2yQ4-J6eUuq_LerAmHVVW",
+      "type": "text",
+      "x": 298,
+      "y": 720,
+      "width": 413.69561767578125,
+      "height": 160,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aS",
+      "roundness": null,
+      "seed": 1212770682,
+      "version": 444,
+      "versionNonce": 309911142,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1793115897778,
+      "link": null,
+      "locked": false,
+      "text": "End to End tests.\n- this is what it sounds like. \n- a test from a users perspective that goes through\nand clicks through the application as if it were a \nperson.\n- these sound like a great idea, maybe for a large\nestablished company, but these always will break.\nALWAYS break especially at a small ",
+      "fontSize": 16,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "End to End tests.\n- this is what it sounds like. \n- a test from a users perspective that goes through\nand clicks through the application as if it were a \nperson.\n- these sound like a great idea, maybe for a large\nestablished company, but these always will break.\nALWAYS break especially at a small ",
+      "autoResize": true,
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

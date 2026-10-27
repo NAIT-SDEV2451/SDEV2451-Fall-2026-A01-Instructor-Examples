@@ -66,6 +66,10 @@ class Order(models.Model):
     )
     tickets = models.ManyToManyField(Ticket, related_name="orders")
 
+    # total price is a property on the class
+    # but it depends on all of the other tickets.
+    # called not like a function but like a property above.
+    # instance.total_price
     @property
     def total_price(self):
         return sum(ticket.tier.price for ticket in self.tickets.all())

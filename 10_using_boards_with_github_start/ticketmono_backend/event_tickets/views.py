@@ -7,6 +7,7 @@ from .serializers import (
     CreateNewOrderSerializer,
     EventListReadOnlySerializer,
     OrderSerializer,
+    OrderDetailSerializer,
 )
 
 
@@ -24,7 +25,27 @@ class EventViewSet(viewsets.ModelViewSet):
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
-    serializer_class = OrderSerializer
+
+    # we we're going to change this because we want
+    # to use a different serializer depending on
+    # what request method we're using.
+    # serializer_class = OrderSerializer
+
+    def get_serializer_class(self):
+        # get requests
+        # you can also check for self.request.method
+        # or in viewset actions
+        # list, retrieve.
+        # i want to use my new serializer
+        if self.action in ["list", "retrieve"]:
+            # note on the above, if you create a custom
+            # action you need to include the method name
+            # in the action check.
+            return OrderDetailSerializer
+        # our "post/patch"
+        # or in viewset actions
+        # create, update, partial_update
+        return OrderSerializer
 
     def get_queryset(self):
         return Order.objects.filter(customer=self.request.user)

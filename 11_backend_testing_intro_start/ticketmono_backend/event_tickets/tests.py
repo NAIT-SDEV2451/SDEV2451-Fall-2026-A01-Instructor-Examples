@@ -88,3 +88,45 @@ class EventTicketsTestCase(APITestCase):
             len(response.data),  # return events
             EXPECTED_NUM_EVENTS,  # we have a single event
         )
+
+    # the two tests above are doing integration tests.
+    # they are testing urls, the views, the serializers, the models.
+
+    def test_create_order(self):
+        # force auth with self.user
+        self.client.force_authenticate(user=self.user)
+        # create a payload with the event above
+        # tier the above,
+        # quantity of 2
+        payload = {
+            "items": [
+                {
+                    "event_id": self.event.id,
+                    "ticket_tier_id": self.tier.id,
+                    "quantity": 2,
+                }
+            ]
+        }
+
+        # post to orders endpoint
+        response = self.client.post(
+            "/api/v1/orders/",
+            payload,
+            format="json",
+        )
+
+        # assert status codes
+        self.assertEqual(response.status_code, 201)
+
+        # assert order counts
+        self.assertEqual(Order.objects.count(), 1)
+        # get the order
+        order = Order.objects.first()
+        # assert that the customer is the user
+        self.assertEqual(order.customer, self.user)
+
+        # the tickets
+        self.assertEqual(
+            order.tickets.count(),
+            2,
+        )

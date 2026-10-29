@@ -156,3 +156,37 @@ class EventTicketsTestCase(APITestCase):
             len(response.data),
             EXPECTED_NUM_ORDERS_OF_USER,
         )
+
+    def test_order_detail_returns_nested_tickets(self):
+        ticket = Ticket.objects.create(tier=self.tier)
+        order = Order.objects.create(
+            customer=self.user,
+        )
+        order.tickets.set([ticket])
+
+        self.client.force_authenticate(user=self.user)
+        # get the specific order (this is a retrieve)
+        response = self.client.get(f"/api/v1/orders/{order.id}/")
+
+        self.assertEqual(response.status_code, 200)
+        # let's take a deeper look that the body
+
+        # if the key of tickets is in there.
+        self.assertIn("tickets", response.data)
+        # let's check we have 1 ticket
+        self.assertEqual(len(response.data["tickets"]), 1)
+
+        # let's check that we have the tiers and total price
+        self.assertIn(
+            "tier",
+            response.data["tickets"][0],  # the first ticket
+        )
+        self.assertEqual(
+            "General Admission",
+            response.data["tickets"][0]["tier"]["name"],
+        )
+
+        self.assertIn(
+            "total_price",
+            response.data,  # the first ticket
+        )

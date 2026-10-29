@@ -53,3 +53,38 @@ class EventTicketsTestCase(APITestCase):
         # assert that they're the same.
         EXPECTED_COST = 50
         self.assertEqual(order.total_price, EXPECTED_COST)
+
+    # we're going to test our application
+    # by hitting the endpoints in drf
+    # with api test case you can get
+    # a lot of functionality.
+
+    def test_events_list_requires_authentication(self):
+        # the "self.client" allow us to make requests
+        # to the backend.
+        response = self.client.get("/api/v1/events/")
+
+        # in general in testing, what you're testing
+        # is on the left and what you expect is on
+        # the right.
+        self.assertEqual(
+            response.status_code,
+            401,
+        )
+
+    # we're going to use "force_authenticate" on the
+    # client to simulate a authentication.
+    def test_authenticated_user_can_list_events(self):
+        # we're going to force the auth
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get("/api/v1/events/")
+
+        # two assertions, one for status code
+        # one for body/data
+        self.assertEqual(response.status_code, 200)
+        # in this test I'm checking for a single event.
+        EXPECTED_NUM_EVENTS = 1
+        self.assertEqual(
+            len(response.data),  # return events
+            EXPECTED_NUM_EVENTS,  # we have a single event
+        )

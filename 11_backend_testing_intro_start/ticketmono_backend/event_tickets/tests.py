@@ -130,3 +130,29 @@ class EventTicketsTestCase(APITestCase):
             order.tickets.count(),
             2,
         )
+
+    def test_user_cannot_see_other_users_orders(self):
+        # let's create another users
+        other_user = User.objects.create_user(
+            username="other",
+            password="testpass123",
+            role="attendee",
+        )
+        # create an order for them
+        ticket = Ticket.objects.create(tier=self.tier)
+        other_order = Order.objects.create(
+            customer=other_user,
+        )
+        other_order.tickets.set([ticket])
+
+        # login as the existing user
+        self.client.force_authenticate(user=self.user)
+
+        response = self.client.get("/api/v1/orders/")
+
+        EXPECTED_NUM_ORDERS_OF_USER = 0
+        # and ensure that they can't see the order.
+        self.assertEqual(
+            len(response.data),
+            EXPECTED_NUM_ORDERS_OF_USER,
+        )

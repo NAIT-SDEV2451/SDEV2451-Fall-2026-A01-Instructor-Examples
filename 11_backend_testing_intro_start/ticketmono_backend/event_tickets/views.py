@@ -47,4 +47,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         order = Order.objects.create(customer=request.user)
         order.tickets.set(tickets)
 
-        return Response(OrderSerializer(order).data, status=status.HTTP_201_CREATED)
+        return Response(
+            OrderSerializer(order).data,
+            status=status.HTTP_201_CREATED,
+        )

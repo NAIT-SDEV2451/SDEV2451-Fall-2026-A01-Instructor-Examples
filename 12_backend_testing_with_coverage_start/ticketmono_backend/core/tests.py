@@ -56,5 +56,36 @@ class UserRegistrationViewTestCase(APITestCase):
 
 
 # MeView
-# - the view responds with the correct user information.
-# - if you're not logged you don't get anything.
+class MeViewTestCase(APITestCase):
+    me_url = "/api/v1/auth/me/"
+
+    # remember this runs before all tests.
+    def setUp(self):
+        # create a user
+        self.user = User.objects.create(
+            username="gary_ricks",
+            email="test@test.com",
+            role="user",
+        )
+
+    # - the view responds with the correct user information.
+    def test_me_returns_user_data(self):
+        # force auth
+        self.client.force_authenticate(user=self.user)
+        # get the endpoint
+        response = self.client.get(self.me_url)
+        # assert the data.
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual(response.data["id"], self.user.id)
+        self.assertEqual(response.data["username"], self.user.username)
+        self.assertEqual(response.data["email"], self.user.email)
+        self.assertEqual(response.data["role"], self.user.role)
+
+    # - if you're not logged you don't get anything.
+    def test_me_requires_auth_returns_400_for_not_authed(self):
+        # try without authenticating
+        response = self.client.get(self.me_url)
+
+        # check to see the status code.
+        self.assertEqual(response.status_code, 401)

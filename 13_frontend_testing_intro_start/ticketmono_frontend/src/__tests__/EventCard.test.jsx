@@ -3,6 +3,8 @@
 import { describe, it, test, expect } from "vitest";
 
 // this is going to make it so that we can select items on the page.
+// if you want to take a look at how to select items
+// take a look at the docs here: https://testing-library.com/docs/queries/about/
 import { screen } from "@testing-library/react";
 
 // the component that we're testing
@@ -37,5 +39,27 @@ describe("EventCard", () => {
 
   // practice with doing the same thign as above except with
   // venue name and the address.
+  it("renders the venue name and address", () => {
+    // render the component
+    renderWithProviders(
+      <EventCard event={event} /> // pass in jsx
+    )
 
+    const venueName = screen.getByText(event.venue.name)
+    const address = screen.getByText(event.venue.address)
+
+    expect(venueName).toBeInTheDocument()
+    expect(address).toBeInTheDocument()
+  })
+
+  it('links to the event detail page', ()=> {
+    renderWithProviders(
+      <EventCard event={event} /> // pass in jsx
+    )
+
+    // get the link by role
+    const link = screen.getByRole('link', {name: "Get Tickets"})
+    // this is because we're creating a link with the link component.
+    expect(link).toHaveAttribute('href', '/events/1')
+  })
 })

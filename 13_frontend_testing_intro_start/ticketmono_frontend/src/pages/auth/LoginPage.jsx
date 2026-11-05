@@ -1,3 +1,4 @@
+// useNavigate is an external dependency!
 import { useNavigate } from 'react-router-dom'
 import LoginForm from '../../components/LoginForm'
 import { useAuth } from '../../hooks/useAuth'
@@ -8,6 +9,8 @@ function LoginPage() {
 
   function handleSubmit(formData) {
     login(formData, {
+      // if navigate gets called did
+      // our login succeed.
       onSuccess: () => navigate('/'),
     })
   }

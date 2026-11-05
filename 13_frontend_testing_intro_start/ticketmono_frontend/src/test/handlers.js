@@ -44,7 +44,7 @@ export const handlers = [
   }),
   // me endpoint is hit during login the function
   // so we need to mock it.
-  http.post(`${BASE_URL}/auth/me/`, () => {
+  http.get(`${BASE_URL}/auth/me/`, () => {
     return HttpResponse.json(mockUser)
   })
 ]

@@ -38,8 +38,29 @@ describe("EventsListPage", () => {
       expect(event_one).toBeInTheDocument()
       expect(event_two).toBeInTheDocument()
     })
-
   })
 
+  it("shows an error message if the request fails", async () => {
+    // we're going to change the response from the server
+    // for the EVENTS_URL endpoint for this specific test
+    server.use(
+      http.get(EVENTS_URL, ()=> {
+        // let's return an error
+        return HttpResponse.json(
+          {detail: "Server Error"}, // sample response.
+          {status: 500} // server error
+        )
+      })
+    )
+
+    renderWithProviders(<EventsListPage />)
+
+    await waitFor(()=> {
+      const errorMessage = screen.getByText("Failed to load events. Please try again later.")
+
+      expect(errorMessage).toBeInTheDocument()
+    })
+
+  })
 
 })

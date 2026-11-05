@@ -21,11 +21,31 @@ export const mockEvents = [
   },
 ]
 
+export const mockUser = { id: 1, username: 'gary', role: 'user' }
+
+// A fake JWT: header.payload.signature. Only the payload is real base64 JSON,
+// because AuthContext decodes it to read user_id.
+const FAKE_ACCESS_TOKEN = `header.${btoa(JSON.stringify({ user_id: 1 }))}.signature`
+
 // let's set up the handlers to return the data
 export const handlers = [
   // the first endpoint we're "mocking" is the list events
   http.get(`${BASE_URL}/events/`, () => {
     return HttpResponse.json(mockEvents)
+  }),
+  // a couple of views for our login page.
+  http.post(`${BASE_URL}/auth/login/`, () => {
+    // just a note this is a simulated successful response
+    // on login of a user.
+    return HttpResponse.json({
+      access: FAKE_ACCESS_TOKEN,
+      refresh: "fake-refresh-lol"
+    })
+  }),
+  // me endpoint is hit during login the function
+  // so we need to mock it.
+  http.post(`${BASE_URL}/auth/me/`, () => {
+    return HttpResponse.json(mockUser)
   })
 ]
 

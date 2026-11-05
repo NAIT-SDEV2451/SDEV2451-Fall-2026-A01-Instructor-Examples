@@ -8,6 +8,8 @@ import { MemoryRouter } from "react-router-dom"
 
 import { render } from "@testing-library/react"
 
+import { AuthProvider } from "../contexts/AuthContext"
+
 // we're going "augment" render above with our render
 // note the ui below will be the component that we render
 export function renderWithProviders(ui, { intialEntries = ["/"] } = {}) {
@@ -24,9 +26,11 @@ export function renderWithProviders(ui, { intialEntries = ["/"] } = {}) {
   //
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={intialEntries}>
-        {ui}
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={intialEntries}>
+          {ui}
+        </MemoryRouter>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

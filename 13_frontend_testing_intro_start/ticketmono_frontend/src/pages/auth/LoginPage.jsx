@@ -1,13 +1,20 @@
+// useNavigate is an external dependency!
 import { useNavigate } from 'react-router-dom'
 import LoginForm from '../../components/LoginForm'
 import { useAuth } from '../../hooks/useAuth'
 
 function LoginPage() {
   const { login, isLoggingIn, loginError } = useAuth()
+
+  // in our tests we're using vi.mock to replace
+  // the "useNavigate" with our mock in the react router dom
+  // package.
   const navigate = useNavigate()
 
   function handleSubmit(formData) {
     login(formData, {
+      // inside of our tests navigate here is
+      // our mock navigate function
       onSuccess: () => navigate('/'),
     })
   }

@@ -23,7 +23,7 @@ Backend tests tell you your API returns the right data. They don't tell you the 
 - **Integration tests** — render a component that *fetches its own data* (through a hook, through React Query) and assert on how it behaves across loading, error, and success states. `EventsListPage` is this kind of test — it isn't really testing "the network," it's testing "does this component react correctly to what the network gives it."
 - **End-to-end (E2E) tests** — a real browser driving the whole stack, frontend and backend together. We are not covering E2E in this course, but it's worth knowing the term exists above component and integration tests in the testing pyramid.
 
-This example focuses on component and integration tests. **Example 14** builds on this with tests for forms, user interactions, and navigation.
+This example focuses on component and integration tests, and ends with a first look at user interaction: filling in the login form and checking where the app navigates afterwards.
 
 ---
 
@@ -31,7 +31,7 @@ This example focuses on component and integration tests. **Example 14** builds o
 
 - **[Vitest](https://vitest.dev/)** — the test runner. It's built by the Vite team and reuses your existing `vite.config.js`, so there's no separate build pipeline to configure.
 - **[`@testing-library/react`](https://testing-library.com/docs/react-testing-library/intro/)** — renders components into a fake DOM and gives you `screen` to query them the way a user would (by visible text, by button role) instead of by CSS selector or component internals.
-- **[`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/)** — simulates real user interactions (clicks, typing). We install it now; you'll use it starting in Example 14.
+- **[`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro/)** — simulates real user interactions (clicks, typing). You'll use it in Step 11 to fill in and submit the login form.
 - **[`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom)** — adds readable matchers like `.toBeInTheDocument()` and `.toBeDisabled()` on top of Vitest's `expect`.
 - **[jsdom](https://github.com/jsdom/jsdom)** — a JavaScript implementation of the DOM that runs in Node. This is what lets Vitest render React components without opening an actual browser.
 - **[MSW](https://mswjs.io/) (Mock Service Worker)** — intercepts `fetch` calls at the network level and returns fake responses you control. Your components call the exact same `apiClient` they call in production; MSW just makes sure those calls never leave the test process.
@@ -49,8 +49,9 @@ This example focuses on component and integration tests. **Example 14** builds o
 - **Step 8** — Create a `renderWithProviders` helper
 - **Step 9** — Write your first test: `EventCard`
 - **Step 10** — Write an integration test: `EventsListPage`
-- **Step 11** — Best practices for frontend tests
-- **Step 12** — Commit, push, and open a pull request
+- **Step 11** — Test navigation with a mocked `useNavigate`: `LoginPage`
+- **Step 12** — Best practices for frontend tests
+- **Step 13** — Commit, push, and open a pull request
 
 ---
 
@@ -176,9 +177,26 @@ export const mockEvents = [
   },
 ]
 
+export const mockUser = { id: 1, username: 'sam', role: 'user' }
+
+// A fake JWT: header.payload.signature. Only the payload is real base64 JSON,
+// because AuthContext decodes it to read user_id.
+const FAKE_ACCESS_TOKEN = `header.${btoa(JSON.stringify({ user_id: 1 }))}.signature`
+
 export const handlers = [
   http.get(`${BASE_URL}/events/`, () => {
     return HttpResponse.json(mockEvents)
+  }),
+
+  http.post(`${BASE_URL}/auth/login/`, () => {
+    return HttpResponse.json({
+      access: FAKE_ACCESS_TOKEN,
+      refresh: 'fake-refresh-token',
+    })
+  }),
+
+  http.get(`${BASE_URL}/auth/me/`, () => {
+    return HttpResponse.json(mockUser)
   }),
 ]
 ```
@@ -189,6 +207,8 @@ export const handlers = [
 - `BASE_URL` matches the same default your `apiClient` (`src/api/client.js`) falls back to when `VITE_API_URL` isn't set, so requests made in tests match the URL MSW is listening for.
 - `mockEvents` is fixture data shaped exactly like what the real `/events/` endpoint returns — matching the fields `EventCard` and `EventsListPage` actually read (`name`, `date_time`, `venue.name`, `venue.address`).
 - `http.get(...)` registers a **default** handler for `GET /events/`. Every test gets this response unless a specific test overrides it — you'll see that override in Step 10, for testing the error state.
+- The two **auth handlers** are for the `LoginPage` test in Step 11. When a user logs in, `AuthContext` (`src/contexts/AuthContext.jsx`) first calls `POST /auth/login/` to get tokens, then calls `GET /auth/me/` to get the username and role. A successful login needs both requests to be mocked.
+- `FAKE_ACCESS_TOKEN` isn't a real signed JWT, but `AuthContext` decodes the middle (payload) section of the token with `atob` to read `user_id`. The payload therefore has to be valid base64-encoded JSON, or the decode fails. The header and signature are never checked on the frontend, so placeholder strings are fine.
 ---
 
 ### Step 6 — Create the MSW Server
@@ -242,6 +262,7 @@ You'll still see `No test files found` — that's still correct, we haven't writ
 Our components don't work on their own. In the real app, `App.jsx` wraps everything in providers:
 
 - `QueryClientProvider` — `EventsListPage` calls `useEvents()`, which calls React Query's `useQuery`. Without a `QueryClient` above it, `useQuery` throws.
+- `AuthProvider` — `LoginPage` calls `useAuth()`, which throws if there's no `AuthProvider` above it.
 - `BrowserRouter` — `EventCard` renders a `<Link>` to `/events/:id`. A `<Link>` outside a router throws too.
 
 Testing Library's `render` only renders the exact component you give it, so in a test there's no `App.jsx` and none of those providers. Instead of repeating the same wrapper in every test file, we'll write one helper that every test uses. Create `src/test/renderWithProviders.jsx`:
@@ -250,6 +271,8 @@ Testing Library's `render` only renders the exact component you give it, so in a
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router-dom'
 import { render } from '@testing-library/react'
+
+import { AuthProvider } from '../contexts/AuthContext'
 
 export function renderWithProviders(ui, { initialEntries = ['/'] } = {}) {
   const queryClient = new QueryClient({
@@ -261,9 +284,11 @@ export function renderWithProviders(ui, { initialEntries = ['/'] } = {}) {
 
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={initialEntries}>
-        {ui}
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={initialEntries}>
+          {ui}
+        </MemoryRouter>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }
@@ -278,7 +303,8 @@ export function renderWithProviders(ui, { initialEntries = ['/'] } = {}) {
 - **`retry: false`** turns off React Query's automatic retries. By default, a failed query is retried 3 times with a growing delay between attempts before `isError` becomes `true`. That's great for real users on a flaky network, but in a test it means the error state takes several seconds to appear, and `waitFor` gives up after 1 second. With retries off, a `500` from MSW shows the error state right away.
 - **`MemoryRouter` instead of `BrowserRouter`.** `BrowserRouter` reads and writes the real browser URL bar, which doesn't exist in jsdom. `MemoryRouter` keeps the route history in memory, so `<Link>` and `useNavigate` work without a real browser.
 - **`initialEntries = ['/']`** sets which URL the router starts on. We don't need it in this example, but it lets a later test render a page as if the user were at a specific route, e.g. `renderWithProviders(<EventDetailPage />, { initialEntries: ['/events/1'] })`.
-- We only include the providers our components under test actually need. `AuthProvider` and `CartProvider` from `App.jsx` aren't needed for `EventCard` or `EventsListPage`, so we leave them out for now. If a future test renders a component that uses one of those contexts, this helper is the one place to add it.
+- **`AuthProvider` goes inside `QueryClientProvider`** because it uses React Query's `useMutation` for login and register, the same order as in `App.jsx`. `EventCard` and `EventsListPage` don't use auth, but wrapping them in `AuthProvider` doesn't change how they render. Putting it in the helper means `LoginPage` (Step 11) works without any extra setup.
+- We only include the providers our components under test actually need. `CartProvider` from `App.jsx` isn't used by any component we test here, so we leave it out. If a future test renders a component that uses it, this helper is the one place to add it.
 
 There's nothing to run yet — this file is a helper, not a test. You'll use it in every test from Step 9 onward.
 
@@ -425,7 +451,140 @@ You should now see **2 test files, 6 tests total**, all passing — 3 in `EventC
 
 ---
 
-## Step 11 — Best Practices for Frontend Tests
+### Step 11 — Test Navigation with a Mocked `useNavigate`: `LoginPage`
+
+So far every test has only checked what's **on screen**. `LoginPage` (`src/pages/auth/LoginPage.jsx`) also does something after the user submits the form: when login succeeds, it sends the user to the home page:
+
+```jsx
+const navigate = useNavigate()
+
+function handleSubmit(formData) {
+  login(formData, {
+    onSuccess: () => navigate('/'),
+  })
+}
+```
+
+We want to test that this redirect happens. The problem is that in a test there's no real URL bar to check (we're using `MemoryRouter`), and we aren't rendering a home page to look for either. Instead, we **replace `useNavigate` with a mock function** and check that the mock was called with the right path.
+
+Create `src/__tests__/LoginPage.test.jsx`:
+
+```jsx
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { http, HttpResponse } from 'msw'
+
+import LoginPage from '../pages/auth/LoginPage'
+import { renderWithProviders } from '../test/renderWithProviders'
+import { server } from '../test/server'
+
+const LOGIN_URL = 'http://localhost:8000/api/v1/auth/login/'
+
+const mockNavigate = vi.fn()
+
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  }
+})
+
+describe('LoginPage', () => {
+  const user = userEvent.setup()
+
+  beforeEach(() => {
+    mockNavigate.mockClear()
+  })
+
+  afterEach(() => {
+    // A successful login writes tokens to localStorage, so clear them
+    // to make sure the next test starts logged out.
+    localStorage.clear()
+  })
+
+  it('navigates to the home page after a successful login', async () => {
+    renderWithProviders(<LoginPage />)
+
+    await user.type(screen.getByPlaceholderText('Enter your username'), 'sam')
+    await user.type(screen.getByPlaceholderText('Enter your password'), 'password123')
+    await user.click(screen.getByRole('button', { name: 'Log In' }))
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith('/')
+    })
+  })
+
+  it('does not navigate when the login fails', async () => {
+    server.use(
+      http.post(LOGIN_URL, () => {
+        return HttpResponse.json(
+          { detail: 'No active account found with the given credentials' },
+          { status: 401 }
+        )
+      })
+    )
+
+    renderWithProviders(<LoginPage />)
+
+    await user.type(screen.getByPlaceholderText('Enter your username'), 'sam')
+    await user.type(screen.getByPlaceholderText('Enter your password'), 'wrong-password')
+    await user.click(screen.getByRole('button', { name: 'Log In' }))
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('No active account found with the given credentials')
+      ).toBeInTheDocument()
+    })
+    expect(mockNavigate).not.toHaveBeenCalled()
+  })
+})
+```
+
+**What's happening here:**
+
+- **`const mockNavigate = vi.fn()`** creates a **mock function**: a fake function that does nothing except record every call made to it and the arguments it was called with. Later we can ask it "were you called with `'/'`?"
+- **`vi.mock('react-router-dom', ...)`** replaces the `react-router-dom` module for every file in this test, including `LoginPage.jsx`. Vitest moves `vi.mock` calls to the top of the file before any imports run, so `LoginPage` gets the mocked version when it's imported.
+- **`importOriginal()` and `...actual`** keep everything else in `react-router-dom` real. `MemoryRouter`, `Link`, and the rest still work normally, and only `useNavigate` is swapped out. Without `...actual`, `renderWithProviders` would break because `MemoryRouter` would be missing.
+- **`useNavigate: () => mockNavigate`** means that when `LoginPage` calls `useNavigate()`, it gets our mock back. So `navigate('/')` inside the component is really `mockNavigate('/')`.
+- **`userEvent.setup()`** creates a simulated user. `user.type(...)` types into an input one key at a time, and `user.click(...)` clicks a button, the same events a real user would trigger. Both return promises, so we `await` them.
+- **`getByPlaceholderText`** is used to find the inputs because the `<label>`s in `LoginForm` aren't linked to their inputs (there's no `htmlFor`/`id` pair). If they were, `getByLabelText('Username')` would be the better query.
+- **`waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/'))`** is needed because clicking "Log In" starts an async chain: `POST /auth/login/`, then `GET /auth/me/` (both answered by MSW, Step 5), then the `onSuccess` callback calls `navigate('/')`. `waitFor` keeps retrying the assertion until that chain finishes.
+- **The failure test** overrides the login handler with a `401`, just like the `500` override in Step 10. We first wait for the error message to appear, which proves the request has finished. After that we can check `expect(mockNavigate).not.toHaveBeenCalled()`. If we checked `not.toHaveBeenCalled()` straight after the click, it would pass even if navigation was broken, because the request wouldn't have finished yet.
+- **`mockNavigate.mockClear()` in `beforeEach`** wipes the mock's call history before each test. `mockNavigate` is created once for the whole file, so without this, the `'/'` call from the first test would still be recorded in the second test and `not.toHaveBeenCalled()` would fail.
+- **`localStorage.clear()` in `afterEach`**: a successful login saves tokens and the user to `localStorage` (just like in the real app). Clearing it means each test starts logged out, regardless of test order.
+
+> **Why not test the `EventCard` "Get Tickets" link this way?** `EventCard` uses a `<Link>`, not `useNavigate()`. React Router's `<Link>` doesn't go through the `useNavigate` we mocked, so `mockNavigate` would never be called. For links, checking the `href` attribute (as we did in Step 9) is the right test. Mock `useNavigate` when a component calls `navigate(...)` itself, usually after a form submit or a button click.
+
+Run the full suite:
+
+```
+npm run test:run
+```
+
+You should now see **3 test files, 8 tests total**, all passing — 3 in `EventCard.test.jsx`, 3 in `EventsListPage.test.jsx`, and 2 in `LoginPage.test.jsx`.
+
+To see that the test really checks the path, temporarily change `toHaveBeenCalledWith('/')` to `toHaveBeenCalledWith('/wrong')` and run it again. Vitest fails and shows the path `mockNavigate` was actually called with:
+
+```
+AssertionError: expected "vi.fn()" to be called with arguments: [ '/wrong' ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   "/wrong",
++   "/",
+  ]
+```
+
+Change it back to `'/'` before moving on.
+
+---
+
+## Step 12 — Best Practices for Frontend Tests
 
 ### Query the way a user finds things
 Prefer `getByRole` and `getByText` over `container.querySelector`. If you can only find an element with a CSS class, that's often a sign the element needs a clearer accessible role or label — which also makes your real app more accessible.
@@ -438,6 +597,9 @@ MSW intercepts the actual `fetch` call, so `EventsListPage`, `useEvents`, and `f
 
 ### Reset state between tests
 `afterEach(() => server.resetHandlers())` exists precisely so one test's `server.use(...)` override can never leak into another test and cause a confusing, order-dependent failure.
+
+### Reset mocks between tests
+The same goes for mock functions like `mockNavigate`. Call `mockClear()` in `beforeEach` so each test only sees the calls it made itself. Otherwise a `toHaveBeenCalledWith` could pass because of a call from an earlier test, and `not.toHaveBeenCalled()` could fail for the same reason.
 
 ### Turn off React Query retries in tests
 Without `retry: false`, a test for an error state will actually wait through React Query's retry/backoff cycle before failing — slow, and easy to mistake for a hang.
@@ -466,7 +628,7 @@ npx vitest run src/__tests__/EventCard.test.jsx
 
 ---
 
-## Step 12 — Commit, Push, and Open a Pull Request
+## Step 13 — Commit, Push, and Open a Pull Request
 
 **Run the full suite one final time** to confirm everything is green:
 
@@ -478,7 +640,7 @@ npm run test:run
 
 ```
 git add package.json package-lock.json vite.config.js src/test src/__tests__
-git commit -m "Set up Vitest, React Testing Library, and MSW; add EventCard and EventsListPage tests"
+git commit -m "Set up Vitest, React Testing Library, and MSW; add EventCard, EventsListPage, and LoginPage tests"
 ```
 
 **Push your branch to GitHub:**
@@ -500,5 +662,6 @@ In this example you set up the entire frontend testing pipeline for TicketMono:
 - **MSW** to intercept network requests so tests never depend on a real backend
 - A **shared setup file** (`src/test/setup.js`) and **`renderWithProviders`** helper so every test file starts from the same clean baseline
 - Tests covering a **presentational component** (`EventCard`) and a **data-fetching component** across its loading, success, and error states (`EventsListPage`)
+- A **navigation test** (`LoginPage`) that uses `user-event` to fill in and submit a form, and a mocked `useNavigate` (`mockNavigate`) to check where the user is sent afterwards
 
-Everything here tested *rendering* — what shows up on screen. In **Example 14** you'll extend this suite to test **user interaction**: forms, button clicks, and navigation triggered by user input.
+Most of this example tested *rendering*, meaning what shows up on screen. The `LoginPage` test was a first step into testing **user interaction**.

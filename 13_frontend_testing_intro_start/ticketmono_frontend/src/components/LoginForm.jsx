@@ -38,7 +38,11 @@ function LoginForm({ onSubmit, isLoading = false }) {
         />
       </div>
       <button type="submit" className="btn btn-primary w-full mt-2" disabled={isLoading}>
-        {isLoading ? <span className="loading loading-spinner loading-sm" /> : 'Log In'}
+        {isLoading ?
+          <span className="loading loading-spinner loading-sm" />
+          :
+          'Log In'
+        }
       </button>
     </form>
   )

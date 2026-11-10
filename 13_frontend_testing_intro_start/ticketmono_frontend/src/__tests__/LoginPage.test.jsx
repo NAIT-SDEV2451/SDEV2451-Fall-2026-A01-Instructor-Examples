@@ -84,6 +84,50 @@ describe("LoginPage", () => {
 
 
   // unsuccessful login.
+  it("does not navigate when login fails", async () => {
+    // we change the server to "use" a different response.
+      // body {detail: "no active account with these creds"}
+      // status: 401
+    const LOGIN_URL = "http://localhost:8000/api/v1/auth/login/"
+    const ERROR_MESSAGE = "no active account with these creds"
+    server.use(
+      http.post(LOGIN_URL, () => {
+        return HttpResponse.json(
+          {detail: ERROR_MESSAGE},
+          {status: 401}
+        )
+      })
+    )
+
+    // render with providers
+    renderWithProviders(<LoginPage />)
+    // type and click a user and password
+    const usernameInput = screen.getByPlaceholderText(
+      "Enter your username"
+    )
+    const passwordInput = screen.getByPlaceholderText(
+      "Enter your password"
+    )
+
+    await user.type(usernameInput, "gary")
+    await user.type(passwordInput, "supersecretcoolpasswordlolkeeptypinglol")
+
+
+    // click or execture login
+    await user.click(screen.getByRole("button", {name: "Log In"}))
+
+    // wait for the message to show
+    await waitFor(()=> {
+      expect(
+        screen.getByText(ERROR_MESSAGE)
+      ).toBeInTheDocument()
+    })
+    // expect my mock navigate to NOT have been called.
+    // expect(mockNavigate).toHaveBeenCalled() // this is the positive
+    // the only thing you to change is add .not. before tohavebeencalled
+    expect(mockNavigate).not.toHaveBeenCalled()
+
+  })
 
 })
 

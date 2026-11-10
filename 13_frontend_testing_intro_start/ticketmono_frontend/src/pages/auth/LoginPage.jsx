@@ -5,12 +5,16 @@ import { useAuth } from '../../hooks/useAuth'
 
 function LoginPage() {
   const { login, isLoggingIn, loginError } = useAuth()
+
+  // in our tests we're using vi.mock to replace
+  // the "useNavigate" with our mock in the react router dom
+  // package.
   const navigate = useNavigate()
 
   function handleSubmit(formData) {
     login(formData, {
-      // if navigate gets called did
-      // our login succeed.
+      // inside of our tests navigate here is
+      // our mock navigate function
       onSuccess: () => navigate('/'),
     })
   }

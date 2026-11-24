@@ -5,11 +5,16 @@ import { useAuth } from '../../hooks/useAuth'
 // If the user is not authenticated, they are redirected to /login.
 // The `replace` prop replaces the current history entry so the user
 // cannot press Back to get to the protected page without logging in.
-function ProtectedRoute({ children }) {
+// Pass `role` to also require that role. Other logged-in users go to the home page.
+function ProtectedRoute({ children, role }) {
   const { user } = useAuth()
 
   if (!user) {
     return <Navigate to="/login" replace />
+  }
+
+  if (role && user.role !== role) {
+    return <Navigate to="/" replace />
   }
 
   return children

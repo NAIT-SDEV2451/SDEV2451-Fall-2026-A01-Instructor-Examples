@@ -22,6 +22,9 @@ function Navbar() {
       </div>
       <div className="flex gap-4 items-center">
         <NavLink to="/" className="btn btn-ghost btn-sm">Events</NavLink>
+        {user?.role === 'event_organizer' && (
+          <NavLink to="/my-events" className="btn btn-ghost btn-sm">My Events</NavLink>
+        )}
         {user ? (
           <>
             <span className="text-sm text-base-content/60">Hi, {user.username}</span>

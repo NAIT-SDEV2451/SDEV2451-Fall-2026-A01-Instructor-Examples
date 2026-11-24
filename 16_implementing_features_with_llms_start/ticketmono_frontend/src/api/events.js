@@ -6,6 +6,12 @@ export async function fetchEvents() {
   return res.json()
 }
 
+export async function fetchMyEvents() {
+  const res = await apiClient('/events/mine/')
+  if (!res.ok) throw new Error('Failed to fetch your events.')
+  return res.json()
+}
+
 export async function fetchEvent(id) {
   const res = await apiClient(`/events/${id}/`)
   if (!res.ok) throw new Error('Failed to fetch event.')

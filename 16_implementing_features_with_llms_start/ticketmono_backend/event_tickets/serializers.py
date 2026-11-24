@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Event, Order, Ticket, TicketTier, Venue
@@ -32,6 +33,38 @@ class EventListReadOnlySerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ("id", "name", "date_time", "venue", "organizer", "ticket_tiers")
+
+
+# Expects each ticket tier to be annotated with tickets_sold (see EventViewSet.mine).
+class MyEventSerializer(serializers.ModelSerializer):
+    venue = VenueSerializer(read_only=True)
+    status = serializers.SerializerMethodField()
+    tickets_sold = serializers.SerializerMethodField()
+    revenue = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = (
+            "id",
+            "name",
+            "date_time",
+            "venue",
+            "status",
+            "tickets_sold",
+            "revenue",
+        )
+
+    def get_status(self, event):
+        return "past" if event.date_time < timezone.now() else "upcoming"
+
+    def get_tickets_sold(self, event):
+        return sum(tier.tickets_sold for tier in event.ticket_tiers.all())
+
+    def get_revenue(self, event):
+        revenue = sum(
+            tier.price * tier.tickets_sold for tier in event.ticket_tiers.all()
+        )
+        return f"{revenue:.2f}"
 
 
 class CreateNewOrderItemSerializer(serializers.Serializer):
